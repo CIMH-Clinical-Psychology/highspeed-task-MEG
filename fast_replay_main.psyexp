@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" ?>
-<PsychoPy2experiment encoding="utf-8" version="2023.2.2">
+<PsychoPy2experiment encoding="utf-8" version="2023.2.0">
   <Settings>
     <Param val="0" valType="str" updates="None" name="Audio latency priority"/>
-    <Param val="sounddevice" valType="str" updates="None" name="Audio lib"/>
+    <Param val="pygame" valType="str" updates="None" name="Audio lib"/>
     <Param val="" valType="str" updates="None" name="Completed URL"/>
     <Param val="auto" valType="str" updates="None" name="Data file delimiter"/>
     <Param val="u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code" updates="None" name="Data filename"/>
@@ -536,8 +536,8 @@
       <CodeComponent name="startup" plugin="None">
         <Param val="import meg_triggers&amp;#10;from meg_triggers import send_trigger&amp;#10;meg_triggers.set_default_duration(0.005)&amp;#10;" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="import * as meg_triggers from 'meg_triggers';&amp;#10;import {send_trigger} from 'meg_triggers';&amp;#10;meg_triggers.set_default_duration(0.005);&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="import pandas as pd&amp;#10;&amp;#10;subj_id = expInfo['participant']&amp;#10;&amp;#10;df_localizer = pd.read_csv(f'./sequences/localizer_{subj_id}.csv')&amp;#10;df_sequences = pd.read_csv(f'./sequences/sequences_{subj_id}.csv')&amp;#10;&amp;#10;# set variables we will access later&amp;#10;i_localizer = 0&amp;#10;i_sequence = 0&amp;#10;i_block = 0&amp;#10;&amp;#10;# store reward&amp;#10;reward_count = 0&amp;#10;false_alarms = 0&amp;#10;misses = 0&amp;#10;wrong_answers = 0&amp;#10;&amp;#10;# set the number of repetitions we have&amp;#10;n_blocks = max(df_localizer.block)&amp;#10;n_localizer_trials = 0#max(df_localizer.trial)&amp;#10;n_sequence_trials = max(df_sequences.trial)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="import * as pd from 'pandas';&amp;#10;subj_id = expInfo[&quot;participant&quot;];&amp;#10;df_localizer = pd.read_csv(`./sequences/localizer_${subj_id}.csv`);&amp;#10;df_sequences = pd.read_csv(`./sequences/sequences_${subj_id}.csv`);&amp;#10;i_localizer = 0;&amp;#10;i_sequence = 0;&amp;#10;i_block = 0;&amp;#10;reward_count = 0;&amp;#10;false_alarms = 0;&amp;#10;misses = 0;&amp;#10;wrong_answers = 0;&amp;#10;n_blocks = Math.max(df_localizer.block);&amp;#10;n_localizer_trials = 0;&amp;#10;n_sequence_trials = Math.max(df_sequences.trial);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="import pandas as pd&amp;#10;&amp;#10;subj_id = expInfo['participant']&amp;#10;&amp;#10;df_localizer = pd.read_csv(f'./sequences/localizer_{subj_id}.csv')&amp;#10;df_sequences = pd.read_csv(f'./sequences/sequences_{subj_id}.csv')&amp;#10;&amp;#10;# set variables we will access later&amp;#10;i_localizer = 0&amp;#10;i_sequence = 0&amp;#10;i_block = 0&amp;#10;&amp;#10;# store reward&amp;#10;reward_count = 0&amp;#10;false_alarms = 0&amp;#10;misses = 0&amp;#10;wrong_answers = 0&amp;#10;&amp;#10;# set the number of repetitions we have&amp;#10;n_blocks = max(df_localizer.block)&amp;#10;n_localizer_trials = max(df_localizer.trial)&amp;#10;n_sequence_trials = max(df_sequences.trial)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="import * as pd from 'pandas';&amp;#10;subj_id = expInfo[&quot;participant&quot;];&amp;#10;df_localizer = pd.read_csv(`./sequences/localizer_${subj_id}.csv`);&amp;#10;df_sequences = pd.read_csv(`./sequences/sequences_${subj_id}.csv`);&amp;#10;i_localizer = 0;&amp;#10;i_sequence = 0;&amp;#10;i_block = 0;&amp;#10;reward_count = 0;&amp;#10;false_alarms = 0;&amp;#10;misses = 0;&amp;#10;wrong_answers = 0;&amp;#10;n_blocks = Math.max(df_localizer.block);&amp;#10;n_localizer_trials = Math.max(df_localizer.trial);&amp;#10;n_sequence_trials = Math.max(df_sequences.trial);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>

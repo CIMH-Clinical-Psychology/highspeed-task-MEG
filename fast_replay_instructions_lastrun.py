@@ -1,8 +1,8 @@
 ﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy3 Experiment Builder (v2023.2.2),
-    on Januar 12, 2024, at 11:43
+This experiment was created using PsychoPy3 Experiment Builder (v2023.2.0),
+    on January 12, 2024, at 14:46
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -16,7 +16,7 @@ from psychopy import locale_setup
 from psychopy import prefs
 from psychopy import plugins
 plugins.activatePlugins()
-prefs.hardware['audioLib'] = 'sounddevice'
+prefs.hardware['audioLib'] = 'pygame'
 prefs.hardware['audioLatencyMode'] = '0'
 from psychopy import sound, gui, visual, core, data, event, logging, clock, colors, layout
 from psychopy.tools import environmenttools
@@ -37,7 +37,7 @@ from psychopy.hardware import keyboard
 # Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__))
 # Store info about the experiment session
-psychopyVersion = '2023.2.2'
+psychopyVersion = '2023.2.0'
 expName = 'untitled'  # from the Builder filename that created this script
 expInfo = {
     'participant': '0',
@@ -106,7 +106,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\simon.kern\\Nextcloud\\ZI\\2023.09_MEG_Fast_Replay\\MEG-highspeed-task\\fast_replay_instructions_lastrun.py',
+        originPath='C:\\Users\\ElektaStimPC\\Desktop\\MEG-highspeed-task-main\\fast_replay_instructions_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -130,11 +130,10 @@ def setupLogging(filename):
     psychopy.logging.LogFile
         Text stream to receive inputs from the logging system.
     """
-    # this outputs to the screen, not a file
-    logging.console.setLevel(logging.EXP)
     # save a log file for detail verbose info
     logFile = logging.LogFile(filename+'.log', level=logging.EXP)
-    
+    logging.console.setLevel(logging.WARNING)  # this outputs to the screen, not a file
+    # return log file
     return logFile
 
 
@@ -699,7 +698,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "instruct_end" ---
     text_5 = visual.TextStim(win=win, name='text_5',
-        text='Die Übung ist nun beendet. \n\nBitte melden Sie sich beim Experimentleider um mit dem eigentlichen Experiment zu beginnen..\n\n-------------------------\n\nThe experiment has ended. Please let the experimentator know that you are finished, so that you can start the main experiment.',
+        text='Die Übung ist nun beendet. \n\nBitte melden Sie sich beim Experimentleider um mit dem eigentlichen Experiment zu beginnen.\n\n-------------------------\n\nThe experiment has ended. Please let the experimentator know that you are finished, so that you can start the main experiment.',
         font='Open Sans',
         pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -1668,10 +1667,8 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             _key_resp_localizer_allKeys = []
             sound_correct.setSound('sounds/soundCoin.wav', secs=0.5, hamming=True)
             sound_correct.setVolume(1.0, log=False)
-            sound_correct.seek(0)
             sound_wrong.setSound('sounds/soundError.wav', secs=0.5, hamming=True)
             sound_wrong.setVolume(1.0, log=False)
-            sound_wrong.seek(0)
             # Run 'Begin Routine' code from localizer_code
             df_block = df_localizer[df_localizer['block']==i_block].reset_index()
             df_trial = df_block.iloc[i_localizer]
@@ -1940,8 +1937,8 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             if key_resp_localizer.keys != None:  # we had a response
                 localizer_trials.addData('key_resp_localizer.rt', key_resp_localizer.rt)
                 localizer_trials.addData('key_resp_localizer.duration', key_resp_localizer.duration)
-            sound_correct.pause()  # ensure sound has stopped at end of Routine
-            sound_wrong.pause()  # ensure sound has stopped at end of Routine
+            sound_correct.stop()  # ensure sound has stopped at end of Routine
+            sound_wrong.stop()  # ensure sound has stopped at end of Routine
             # Run 'End Routine' code from localizer_code
             i_localizer+=1
             # the Routine "localizer" was not non-slip safe, so reset the non-slip timer
@@ -3124,7 +3121,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             thisExp.addData('buffer.started', globalClock.getTime())
             sound_birds.setSound('sounds/soundWait.wav', secs=t_buffer - (5*t_img_sequence + 5*t_isi), hamming=True)
             sound_birds.setVolume(1.0, log=False)
-            sound_birds.seek(0)
             # keep track of which components have finished
             bufferComponents = [buffer_fixation, sound_birds]
             for thisComponent in bufferComponents:
@@ -3241,7 +3237,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 if hasattr(thisComponent, "setAutoDraw"):
                     thisComponent.setAutoDraw(False)
             thisExp.addData('buffer.stopped', globalClock.getTime())
-            sound_birds.pause()  # ensure sound has stopped at end of Routine
+            sound_birds.stop()  # ensure sound has stopped at end of Routine
             # the Routine "buffer" was not non-slip safe, so reset the non-slip timer
             routineTimer.reset()
             
@@ -3705,7 +3701,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     
     # --- Run Routine "instruct_end" ---
     routineForceEnded = not continueRoutine
-    while continueRoutine and routineTimer.getTime() < 1.0:
+    while continueRoutine and routineTimer.getTime() < 5.0:
         # get current time
         t = routineTimer.getTime()
         tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -3736,7 +3732,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         # if text_5 is stopping this frame...
         if text_5.status == STARTED:
             # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > text_5.tStartRefresh + 1.0-frameTolerance:
+            if tThisFlipGlobal > text_5.tStartRefresh + 5-frameTolerance:
                 # keep track of stop time/frame for later
                 text_5.tStop = t  # not accounting for scr refresh
                 text_5.frameNStop = frameN  # exact frame index
@@ -3776,7 +3772,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     if routineForceEnded:
         routineTimer.reset()
     else:
-        routineTimer.addTime(-1.000000)
+        routineTimer.addTime(-5.000000)
     
     # mark experiment as finished
     endExperiment(thisExp, win=win, inputs=inputs)
@@ -3851,7 +3847,7 @@ def quit(thisExp, win=None, inputs=None, thisSession=None):
         win.close()
     if inputs is not None:
         if 'eyetracker' in inputs and inputs['eyetracker'] is not None:
-            inputs['eyetracker'].setConnectionState(False)
+            eyetracker.setConnectionState(False)
     logging.flush()
     if thisSession is not None:
         thisSession.stop()

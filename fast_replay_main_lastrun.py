@@ -1,8 +1,8 @@
 ﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy3 Experiment Builder (v2023.2.2),
-    on Januar 12, 2024, at 11:46
+This experiment was created using PsychoPy3 Experiment Builder (v2023.2.0),
+    on January 12, 2024, at 14:55
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -16,7 +16,7 @@ from psychopy import locale_setup
 from psychopy import prefs
 from psychopy import plugins
 plugins.activatePlugins()
-prefs.hardware['audioLib'] = 'sounddevice'
+prefs.hardware['audioLib'] = 'pygame'
 prefs.hardware['audioLatencyMode'] = '0'
 from psychopy import sound, gui, visual, core, data, event, logging, clock, colors, layout
 from psychopy.tools import environmenttools
@@ -33,6 +33,19 @@ import sys  # to get file system encoding
 import psychopy.iohub as io
 from psychopy.hardware import keyboard
 
+# --- Setup global variables (available in all functions) ---
+# Ensure that relative paths start from the same directory as this script
+_thisDir = os.path.dirname(os.path.abspath(__file__))
+# Store info about the experiment session
+psychopyVersion = '2023.2.0'
+expName = 'untitled'  # from the Builder filename that created this script
+expInfo = {
+    'participant': '0',
+    'date': data.getDateStr(),  # add a simple timestamp
+    'expName': expName,
+    'psychopyVersion': psychopyVersion,
+}
+
 # Run 'Before Experiment' code from startup
 import meg_triggers
 from meg_triggers import send_trigger
@@ -42,19 +55,6 @@ meg_triggers.set_default_duration(0.005)
 import os.path as osp
 def get_image_name(filename):
     return osp.splitext(osp.basename(filename))[0]
-# --- Setup global variables (available in all functions) ---
-# Ensure that relative paths start from the same directory as this script
-_thisDir = os.path.dirname(os.path.abspath(__file__))
-# Store info about the experiment session
-psychopyVersion = '2023.2.2'
-expName = 'untitled'  # from the Builder filename that created this script
-expInfo = {
-    'participant': '0',
-    'date': data.getDateStr(),  # add a simple timestamp
-    'expName': expName,
-    'psychopyVersion': psychopyVersion,
-}
-
 
 def showExpInfoDlg(expInfo):
     """
@@ -115,7 +115,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\simon.kern\\Nextcloud\\ZI\\2023.09_MEG_Fast_Replay\\MEG-highspeed-task\\fast_replay_main_lastrun.py',
+        originPath='C:\\Users\\ElektaStimPC\\Desktop\\MEG-highspeed-task-main\\fast_replay_main_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -139,11 +139,10 @@ def setupLogging(filename):
     psychopy.logging.LogFile
         Text stream to receive inputs from the logging system.
     """
-    # this outputs to the screen, not a file
-    logging.console.setLevel(logging.EXP)
     # save a log file for detail verbose info
     logFile = logging.LogFile(filename+'.log', level=logging.EXP)
-    
+    logging.console.setLevel(logging.WARNING)  # this outputs to the screen, not a file
+    # return log file
     return logFile
 
 
@@ -388,7 +387,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     
     # set the number of repetitions we have
     n_blocks = max(df_localizer.block)
-    n_localizer_trials = 0#max(df_localizer.trial)
+    n_localizer_trials = max(df_localizer.trial)
     n_sequence_trials = max(df_sequences.trial)
     sound_wait = sound.Sound('sounds/soundWait.wav', secs=-1, stereo=True, hamming=True,
         name='sound_wait')
@@ -463,7 +462,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     text_7 = visual.TextStim(win=win, name='text_7',
         text='es geht gleich los...',
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -690,7 +689,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     thisExp.addData('startup_code.started', globalClock.getTime())
     sound_wait.setSound('sounds/soundWait.wav', hamming=True)
     sound_wait.setVolume(1.0, log=False)
-    sound_wait.seek(0)
     # keep track of which components have finished
     startup_codeComponents = [sound_wait]
     for thisComponent in startup_codeComponents:
@@ -748,7 +746,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
     thisExp.addData('startup_code.stopped', globalClock.getTime())
-    sound_wait.pause()  # ensure sound has stopped at end of Routine
+    sound_wait.stop()  # ensure sound has stopped at end of Routine
     # the Routine "startup_code" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
     
@@ -1580,10 +1578,8 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             _key_resp_localizer_allKeys = []
             sound_correct.setSound('sounds/soundCoin.wav', secs=0.5, hamming=True)
             sound_correct.setVolume(1.0, log=False)
-            sound_correct.seek(0)
             sound_wrong.setSound('sounds/soundError.wav', secs=0.5, hamming=True)
             sound_wrong.setVolume(1.0, log=False)
-            sound_wrong.seek(0)
             # Run 'Begin Routine' code from localizer_code
             df_block = df_localizer[df_localizer['block']==i_block].reset_index()
             df_trial = df_block.iloc[i_localizer]
@@ -1859,8 +1855,8 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             if key_resp_localizer.keys != None:  # we had a response
                 localizer_trials.addData('key_resp_localizer.rt', key_resp_localizer.rt)
                 localizer_trials.addData('key_resp_localizer.duration', key_resp_localizer.duration)
-            sound_correct.pause()  # ensure sound has stopped at end of Routine
-            sound_wrong.pause()  # ensure sound has stopped at end of Routine
+            sound_correct.stop()  # ensure sound has stopped at end of Routine
+            sound_wrong.stop()  # ensure sound has stopped at end of Routine
             # Run 'End Routine' code from localizer_code
             i_localizer+=1
             # the Routine "localizer" was not non-slip safe, so reset the non-slip timer
@@ -3280,7 +3276,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     
     # --- Run Routine "instruct_end" ---
     routineForceEnded = not continueRoutine
-    while continueRoutine and routineTimer.getTime() < 1.0:
+    while continueRoutine and routineTimer.getTime() < 5.0:
         # get current time
         t = routineTimer.getTime()
         tThisFlip = win.getFutureFlipTime(clock=routineTimer)
@@ -3311,7 +3307,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         # if text_5 is stopping this frame...
         if text_5.status == STARTED:
             # is it time to stop? (based on global clock, using actual start)
-            if tThisFlipGlobal > text_5.tStartRefresh + 1.0-frameTolerance:
+            if tThisFlipGlobal > text_5.tStartRefresh + 5-frameTolerance:
                 # keep track of stop time/frame for later
                 text_5.tStop = t  # not accounting for scr refresh
                 text_5.frameNStop = frameN  # exact frame index
@@ -3351,7 +3347,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     if routineForceEnded:
         routineTimer.reset()
     else:
-        routineTimer.addTime(-1.000000)
+        routineTimer.addTime(-5.000000)
     
     # mark experiment as finished
     endExperiment(thisExp, win=win, inputs=inputs)
@@ -3426,7 +3422,7 @@ def quit(thisExp, win=None, inputs=None, thisSession=None):
         win.close()
     if inputs is not None:
         if 'eyetracker' in inputs and inputs['eyetracker'] is not None:
-            inputs['eyetracker'].setConnectionState(False)
+            eyetracker.setConnectionState(False)
     logging.flush()
     if thisSession is not None:
         thisSession.stop()

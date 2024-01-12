@@ -1,8 +1,8 @@
 ﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy3 Experiment Builder (v2023.2.2),
-    on Januar 12, 2024, at 11:37
+This experiment was created using PsychoPy3 Experiment Builder (v2023.2.0),
+    on January 12, 2024, at 14:34
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -33,6 +33,20 @@ import sys  # to get file system encoding
 import psychopy.iohub as io
 from psychopy.hardware import keyboard
 
+# --- Setup global variables (available in all functions) ---
+# Ensure that relative paths start from the same directory as this script
+_thisDir = os.path.dirname(os.path.abspath(__file__))
+# Store info about the experiment session
+psychopyVersion = '2023.2.0'
+expName = 'fast_replay_resting_state'  # from the Builder filename that created this script
+expInfo = {
+    'participant': '0',
+    'session': '1',
+    'date': data.getDateStr(),  # add a simple timestamp
+    'expName': expName,
+    'psychopyVersion': psychopyVersion,
+}
+
 # Run 'Before Experiment' code from startup
 import time
 import meg_triggers
@@ -43,22 +57,8 @@ trigger_rs_start = 1
 trigger_rs_end = 2
 
 # Run 'Before Experiment' code from parameters
-rs_length = 15
+rs_length = 120
 letter_height = 0.06
-# --- Setup global variables (available in all functions) ---
-# Ensure that relative paths start from the same directory as this script
-_thisDir = os.path.dirname(os.path.abspath(__file__))
-# Store info about the experiment session
-psychopyVersion = '2023.2.2'
-expName = 'fast_replay_resting_state'  # from the Builder filename that created this script
-expInfo = {
-    'participant': '0',
-    'session': '1',
-    'date': data.getDateStr(),  # add a simple timestamp
-    'expName': expName,
-    'psychopyVersion': psychopyVersion,
-}
-
 
 def showExpInfoDlg(expInfo):
     """
@@ -119,7 +119,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\simon.kern\\Nextcloud\\ZI\\2023.09_MEG_Fast_Replay\\MEG-highspeed-task\\fast_replay_resting_state_lastrun.py',
+        originPath='C:\\Users\\ElektaStimPC\\Desktop\\MEG-highspeed-task-main\\fast_replay_resting_state_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -143,11 +143,10 @@ def setupLogging(filename):
     psychopy.logging.LogFile
         Text stream to receive inputs from the logging system.
     """
-    # this outputs to the screen, not a file
-    logging.console.setLevel(logging.EXP)
     # save a log file for detail verbose info
     logFile = logging.LogFile(filename+'.log', level=logging.EXP)
-    
+    logging.console.setLevel(logging.WARNING)  # this outputs to the screen, not a file
+    # return log file
     return logFile
 
 
@@ -400,13 +399,16 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         depth=0.0);
     
     # --- Initialize components for Routine "end_screen" ---
+    sound_1 = sound.Sound('./sounds/soundCoin.wav', secs=1.0, stereo=True, hamming=True,
+        name='sound_1')
+    sound_1.setVolume(1.0)
     text_final = visual.TextStim(win=win, name='text_final',
         text='error',
         font='Open Sans',
         pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color='black', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
-        depth=0.0);
+        depth=-1.0);
     key_resp_2 = keyboard.Keyboard()
     
     # create some handy timers
@@ -972,6 +974,8 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     continueRoutine = True
     # update component parameters for each repeat
     thisExp.addData('end_screen.started', globalClock.getTime())
+    sound_1.setSound('./sounds/soundCoin.wav', secs=1.0, hamming=True)
+    sound_1.setVolume(1.0, log=False)
     key_resp_2.keys = []
     key_resp_2.rt = []
     _key_resp_2_allKeys = []
@@ -992,7 +996,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     win.color = "#b0c4de"
     win.flip()
     # keep track of which components have finished
-    end_screenComponents = [text_final, key_resp_2]
+    end_screenComponents = [sound_1, text_final, key_resp_2]
     for thisComponent in end_screenComponents:
         thisComponent.tStart = None
         thisComponent.tStop = None
@@ -1014,6 +1018,36 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         tThisFlipGlobal = win.getFutureFlipTime(clock=None)
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
+        
+        # if sound_1 is starting this frame...
+        if sound_1.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            # keep track of start time/frame for later
+            sound_1.frameNStart = frameN  # exact frame index
+            sound_1.tStart = t  # local t and not account for scr refresh
+            sound_1.tStartRefresh = tThisFlipGlobal  # on global time
+            # add timestamp to datafile
+            thisExp.addData('sound_1.started', tThisFlipGlobal)
+            # update status
+            sound_1.status = STARTED
+            sound_1.play(when=win)  # sync with win flip
+        
+        # if sound_1 is stopping this frame...
+        if sound_1.status == STARTED:
+            # is it time to stop? (based on global clock, using actual start)
+            if tThisFlipGlobal > sound_1.tStartRefresh + 1.0-frameTolerance:
+                # keep track of stop time/frame for later
+                sound_1.tStop = t  # not accounting for scr refresh
+                sound_1.frameNStop = frameN  # exact frame index
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'sound_1.stopped')
+                # update status
+                sound_1.status = FINISHED
+                sound_1.stop()
+        # update sound_1 status according to whether it's playing
+        if sound_1.isPlaying:
+            sound_1.status = STARTED
+        elif sound_1.isFinished:
+            sound_1.status = FINISHED
         
         # *text_final* updates
         
@@ -1089,6 +1123,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         if hasattr(thisComponent, "setAutoDraw"):
             thisComponent.setAutoDraw(False)
     thisExp.addData('end_screen.stopped', globalClock.getTime())
+    sound_1.stop()  # ensure sound has stopped at end of Routine
     # check responses
     if key_resp_2.keys in ['', [], None]:  # No response was made
         key_resp_2.keys = None
@@ -1173,7 +1208,7 @@ def quit(thisExp, win=None, inputs=None, thisSession=None):
         win.close()
     if inputs is not None:
         if 'eyetracker' in inputs and inputs['eyetracker'] is not None:
-            inputs['eyetracker'].setConnectionState(False)
+            eyetracker.setConnectionState(False)
     logging.flush()
     if thisSession is not None:
         thisSession.stop()
