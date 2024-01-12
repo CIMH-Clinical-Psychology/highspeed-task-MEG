@@ -24,7 +24,7 @@
     <Param val="1" valType="num" updates="None" name="Screen"/>
     <Param val="False" valType="bool" updates="None" name="Show info dlg"/>
     <Param val="False" valType="bool" updates="None" name="Show mouse"/>
-    <Param val="height" valType="str" updates="None" name="Units"/>
+    <Param val="use prefs" valType="str" updates="None" name="Units"/>
     <Param val="" valType="str" updates="None" name="Use version"/>
     <Param val="[1400,1050]" valType="list" updates="None" name="Window size (pixels)"/>
     <Param val="none" valType="str" updates="None" name="backgroundFit"/>
@@ -751,7 +751,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="df_block = df_sequences[df_sequences['block']==i_block].reset_index()&amp;#10;df_trial = df_block.iloc[i_sequence]&amp;#10;&amp;#10;cue_text.text = df_trial.cue&amp;#10;t_isi = df_trial.isi/1000&amp;#10;t_thisbuffer = t_buffer - (5*0.1 + 5*t_isi)&amp;#10;msg = f'sequence {i_sequence}/{len(df_block)} '&amp;#10;msg += f' block {i_block}/{max(df_localizer[&quot;block&quot;])}  isi={t_isi} ms, buffer={t_thisbuffer:1f} s'&amp;#10;msg += f'Expecting choice {df_trial.correct_pos} ({df_trial.target_idx+1})'&amp;#10;print(msg, flush=True)" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="df_block = df_sequences[df_sequences['block']==i_block].reset_index()&amp;#10;df_trial = df_block.iloc[i_sequence]&amp;#10;&amp;#10;translation =  {'Haus': 'house', &amp;#10;                'Gesicht': 'face', &amp;#10;                'Katze': 'cat', &amp;#10;                'Schuh': 'shoe', &amp;#10;                'Stuhl': 'chair'}&amp;#10;if language=='english':&amp;#10;    cue_text.text = translation[df_trial.cue]&amp;#10;else:&amp;#10;    cue_text.text = df_trial.cue&amp;#10;&amp;#10;t_isi = df_trial.isi/1000&amp;#10;t_thisbuffer = t_buffer - (5*0.1 + 5*t_isi)&amp;#10;msg = f'sequence {i_sequence}/{len(df_block)} '&amp;#10;msg += f' block {i_block}/{max(df_localizer[&quot;block&quot;])}  isi={t_isi} ms, buffer={t_thisbuffer:1f} s'&amp;#10;msg += f'Expecting choice {df_trial.correct_pos} ({df_trial.target_idx+1})'&amp;#10;print(msg, flush=True)" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -993,6 +993,23 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
+      <CodeComponent name="code_instruct1" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="if ((language === &quot;english&quot;)) {&amp;#10;    text_2.text = &quot;In the first task, you should always press a button when a picture is shown the wrong way round (upside down). Example:\n\n\n\n\n\n\n\n\nPlease answer as quickly and accurately as possible. You have 1.5 seconds to answer each picture.\n\nPress any button to continue.&quot;;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if language=='english':&amp;#10;    text_2.text = &quot;&quot;&quot;In the first task, you should always press a button when a picture is shown the wrong way round (upside down). Example:&amp;#10;&amp;#10;&amp;#10;&amp;#10;&amp;#10;&amp;#10;&amp;#10;&amp;#10;&amp;#10;Please answer as quickly and accurately as possible. You have 1.5 seconds to answer each picture.&amp;#10;&amp;#10;Press any button to continue.&quot;&quot;&quot;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="code_instruct1" valType="code" updates="None" name="name"/>
+      </CodeComponent>
     </Routine>
     <Routine name="instruct_welcome">
       <RoutineSettingsComponent name="instruct_welcome" plugin="None">
@@ -1164,23 +1181,6 @@
         <Param val="128" valType="num" updates="constant" name="texture resolution"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
       </ImageComponent>
-      <CodeComponent name="code" plugin="None">
-        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="&amp;#10;&amp;#10;for i, img in enumerate([image, image_2, image_3, image_4, image_5]):&amp;#10;    img.pos = [(i-2)/4, -0.35]&amp;#10;    img.size = 0.18" valType="extendedCode" updates="constant" name="Begin Routine"/>
-        <Param val="Py" valType="str" updates="None" name="Code Type"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="code" valType="code" updates="None" name="name"/>
-      </CodeComponent>
       <TextboxComponent name="textbox_3" plugin="None">
         <Param val="top-center" valType="str" updates="constant" name="alignment"/>
         <Param val="center" valType="str" updates="constant" name="anchor"/>
@@ -1221,6 +1221,23 @@
         <Param val="&amp;#10;&amp;#10;Willkommen zur Studie &amp;#10;&lt;b&gt;“Visuelle Objekte Erkennen”&lt;/b&gt;&amp;#10;&amp;#10;Das Experiment “Visuelle Objekte Erkennen” besteht aus zwei Aufgaben bei denen wir Ihnen Bilder von alltäglichen Objekten zeigen. Dabei sollen Sie sich immer jedes Bild genau anschauen. Während des Experiments werden Sie abwechselnd zwei verschiedene Aufgaben bearbeiten, die wir Ihnen im Folgenden genau erklären.&amp;#10;&amp;#10;Drücken Sie eine Taste um fortzufahren." valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
       </TextboxComponent>
+      <CodeComponent name="code" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="&amp;#10;&amp;#10;for i, img in enumerate([image, image_2, image_3, image_4, image_5]):&amp;#10;    img.pos = [(i-2)/4, -0.35]&amp;#10;    img.size = 0.18&amp;#10;    &amp;#10;if language=='english':&amp;#10;    print('selected english')&amp;#10;    textbox_3.setText(&quot;&quot;&quot;\n\nWelcome to the study&amp;#10;&lt;b&gt;“Recognizing Visual Objects”&lt;/b&gt;&amp;#10;&amp;#10;The experiment “Recognizing Visual Objects” consists of two tasks in which we show you pictures of everyday objects. You should always look closely at each picture. During the experiment, you will alternate between two different tasks, which we will now explain in detail.&amp;#10;&amp;#10;Press any button to continue.&quot;&quot;&quot;)&amp;#10;    textbox_3.draw()" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Py" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="code" valType="code" updates="None" name="name"/>
+      </CodeComponent>
     </Routine>
     <Routine name="instruct_task1_2">
       <RoutineSettingsComponent name="instruct_task1_2" plugin="None">
@@ -1278,10 +1295,27 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="Immer wenn Sie eine richtige Antwort gegeben haben, hören Sie kurz das Geräusch einer Münze über die Kopfhörer.&amp;#10;&amp;#10;Sie sollen nicht reagieren, wenn ein Bild richtig herum gezeigt wird.&amp;#10;&amp;#10;Für jedes umgedrehte Bild, das Sie richtig erkannt haben, erhalten Sie eine Belohnung von 3 Cent. Wenn Sie eine falsche Antwort geben (also eine Taste drücken, obwohl das Bild richtig herum dargestellt wurde), werden Ihnen 3 Cent abgezogen.&amp;#10;&amp;#10;Sie sehen nun eine Übung der Aufgabe. &amp;#10;Drücken Sie eine Taste um fortzufahren." valType="str" updates="constant" name="text"/>
+        <Param val="Immer wenn Sie eine richtige Antwort gegeben haben, hören Sie kurz das Geräusch einer Münze über die Kopfhörer. Bitte sagen Sie Bescheid, falls Sie kein Geräusch hören sollten.&amp;#10;&amp;#10;Sie sollen nicht reagieren, wenn ein Bild richtig herum gezeigt wird.&amp;#10;&amp;#10;Für jedes umgedrehte Bild, das Sie richtig erkannt haben, erhalten Sie eine Belohnung von 3 Cent. Wenn Sie eine falsche Antwort geben (also eine Taste drücken, obwohl das Bild richtig herum dargestellt wurde), werden Ihnen 3 Cent abgezogen.&amp;#10;&amp;#10;Sie sehen nun eine Übung der Aufgabe. &amp;#10;Drücken Sie eine Taste um fortzufahren." valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
+      <CodeComponent name="code_instruct2" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="if ((language === &quot;english&quot;)) {&amp;#10;    text_4.text = &quot;Whenever you have given a correct answer, you will briefly hear the sound of a coin through the headphones. Please let us know if you do not hear a sound.\n\nYou should not react when a picture is shown the right way round.\n\nYou will receive a reward of 3 cents for each upside-down picture that you have correctly recognized. If you give an incorrect answer (i.e. press a button even though the picture was shown the right way round), you will be deducted 3 cents.\n\nYou will now see an exercise of the task. \nPress any button to continue.&quot;;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if language=='english':&amp;#10;    text_4.text = &quot;&quot;&quot;Whenever you have given a correct answer, you will briefly hear the sound of a coin through the headphones. Please let us know if you do not hear a sound.&amp;#10;&amp;#10;You should not react when a picture is shown the right way round.&amp;#10;&amp;#10;You will receive a reward of 3 cents for each upside-down picture that you have correctly recognized. If you give an incorrect answer (i.e. press a button even though the picture was shown the right way round), you will be deducted 3 cents.&amp;#10;&amp;#10;You will now see an exercise of the task. &amp;#10;Press any button to continue.&quot;&quot;&quot;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="code_instruct2" valType="code" updates="None" name="name"/>
+      </CodeComponent>
     </Routine>
     <Routine name="localizer_feedback">
       <RoutineSettingsComponent name="localizer_feedback" plugin="None">
@@ -1349,7 +1383,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="if false_alarms==0 and misses==0:&amp;#10;    localizer_repetition.finished=True&amp;#10;    feedback_string = 'Gratuliere, Sie haben alles richtig gemacht!\n\n'&amp;#10;    feedback_string += 'Es geht nun weiter mit einer Übung der zweiten Aufgabe.\n\n'&amp;#10;    feedback_string += 'Bitte drücken Sie eine Taste um fortzufahren.'&amp;#10;    text_feedback.text = feedback_string&amp;#10;else:&amp;#10;    feedback_string = ''&amp;#10;    if misses:&amp;#10;        feedback_string += f'Sie haben {misses}x verpasst eine Taste bei einem auf dem Kopf stehenden Bild zu drücken.\n'&amp;#10;    if false_alarms:&amp;#10;        feedback_string += f'Sie haben {false_alarms}x an der falschen  Stelle gedrückt.\n'  &amp;#10;    feedback_string += '\n\nDrücken Sie nur eine Taste, wenn ein Bild falsch herum ist. '&amp;#10;    feedback_string += 'Falls Sie Fragen haben, stellen Sie diese gerne dem Experimentleiter.\n'&amp;#10;    feedback_string += '\nDrücken Sie eine beliebige Taste um die Übung zu wiederholen.'&amp;#10;    text_feedback.text = feedback_string&amp;#10;&amp;#10;    # reset counters&amp;#10;    i_localizer = 0&amp;#10;    false_alarms = 0&amp;#10;    misses = 0" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="if false_alarms==0 and misses==0:&amp;#10;    localizer_repetition.finished=True&amp;#10;    if language=='german':&amp;#10;        feedback_string = 'Gratuliere, Sie haben alles richtig gemacht!\n\n'&amp;#10;        feedback_string += 'Es geht nun weiter mit einer Übung der zweiten Aufgabe.\n\n'&amp;#10;        feedback_string += 'Bitte drücken Sie eine Taste um fortzufahren.'&amp;#10;    elif language=='english':&amp;#10;        feedback_string = 'Congratulations, you did everything correctly!\n\n'&amp;#10;        feedback_string += 'Now we continue with the second task.\n\n'&amp;#10;        feedback_string += 'Please press any button to continue.'&amp;#10;    text_feedback.text = feedback_string&amp;#10;else:&amp;#10;    feedback_string = ''&amp;#10;    if misses:&amp;#10;        if language=='german':&amp;#10;            feedback_string += f'Sie haben {misses}x verpasst eine Taste bei einem auf dem Kopf stehenden Bild zu drücken.\n'&amp;#10;        elif language=='english':&amp;#10;            feedback_string += f'You missed {misses}x to press a button when the picture was upside down.\n'&amp;#10;&amp;#10;    if false_alarms:&amp;#10;        if language=='german':&amp;#10;            feedback_string += f'Sie haben {false_alarms}x an der falschen  Stelle gedrückt.\n'  &amp;#10;        elif language=='english':&amp;#10;            feedback_string += f'You have pressed at the wrong time {false_alarms}x.\n'  &amp;#10;    if language=='german':&amp;#10;&amp;#10;        feedback_string += '\n\nDrücken Sie nur eine Taste, wenn ein Bild falsch herum ist. '&amp;#10;        feedback_string += 'Falls Sie Fragen haben, stellen Sie diese gerne dem Experimentleiter.\n'&amp;#10;        feedback_string += '\nDrücken Sie eine beliebige Taste um die Übung zu wiederholen.'&amp;#10;    elif language=='english':&amp;#10;        feedback_string += '\nPlease only press a button when a picture is upside-down. '&amp;#10;        feedback_string += 'If you have any questions, please ask the experimentator now.\n'&amp;#10;        feedback_string += '\nPlease press any button to repeat the task.'&amp;#10;    text_feedback.text = feedback_string&amp;#10;&amp;#10;    # reset counters&amp;#10;    i_localizer = 0&amp;#10;    false_alarms = 0&amp;#10;    misses = 0" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -1421,6 +1455,23 @@
         <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
+      <CodeComponent name="code_instruct3" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="if ((language === &quot;english&quot;)) {&amp;#10;    text_3.text = &quot;\n\nIn the second task, you are first shown a word that describes one of the five pictures.\n\nShortly afterwards, all five pictures are played back to you in a very fast, random order. Your task is to remember at which position the object of the previously shown word is.\nThe speed at which the pictures are shown is different in each round and will be very fast in some cases.\n\nIt is therefore important that you watch the sequence of pictures carefully and remember the position at which the given object first appeared.\n\nPlease press any button to continue.&quot;;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if language=='english':&amp;#10;    text_3.text = &quot;&quot;&quot;&amp;#10;&amp;#10;In the second task, you are first shown a word that describes one of the five pictures.&amp;#10;&amp;#10;Shortly afterwards, all five pictures are played back to you in a very fast, random order. Your task is to remember at which position the object of the previously shown word is.&amp;#10;The speed at which the pictures are shown is different in each round and will be very fast in some cases.&amp;#10;&amp;#10;It is therefore important that you watch the sequence of pictures carefully and remember the position at which the given object first appeared.&amp;#10;&amp;#10;Please press any button to continue.&quot;&quot;&quot;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="code_instruct3" valType="code" updates="None" name="name"/>
+      </CodeComponent>
     </Routine>
     <Routine name="sequence_feedback">
       <RoutineSettingsComponent name="sequence_feedback" plugin="None">
@@ -1488,7 +1539,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="if wrong_answers==0 and misses==0:&amp;#10;    sequence_repetition.finished=True&amp;#10;    feedback_string = 'Sie haben bei allen drei Sequenzen die richtige Position bestimmt. Gratulation!\n\n'&amp;#10;    feedback_string += 'Die Übung ist nun beendet. Bitte melden Sie sich beim Experimentleiter.\n\n'&amp;#10;    feedback_string += 'Falls Sie noch Fragen haben, stellen Sie diese gerne.'&amp;#10;    text_feedback_seq.text = feedback_string&amp;#10;&amp;#10;else:&amp;#10;    feedback_string = ''&amp;#10;    if wrong_answers:&amp;#10;        feedback_string += f'Sie haben {wrong_answers}x falsch geantwortet. '&amp;#10;    if misses:&amp;#10;        feedback_string += f'Sie haben {misses}x verpasst zu antworten. Bitte antworten Sie schnell genug! '&amp;#10;    feedback_string += '\n\nFalls Sie Fragen haben, stellen Sie diese gerne dem Experimentleiter.\n'&amp;#10;    feedback_string += '\nDrücken Sie eine beliebige Taste um die Übung zu wiederholen.'&amp;#10;    text_feedback_seq.text = feedback_string&amp;#10;    &amp;#10;    # reset counters&amp;#10;    wrong_answers = 0&amp;#10;    misses = 0&amp;#10;    i_sequence = 0&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="if wrong_answers==0 and misses==0:&amp;#10;    sequence_repetition.finished=True&amp;#10;    if language=='german':&amp;#10;        feedback_string = 'Sie haben bei allen drei Sequenzen die richtige Position bestimmt. Gratulation!\n\n'&amp;#10;        feedback_string += 'Die Übung ist nun beendet. Bitte melden Sie sich beim Experimentleiter.\n\n'&amp;#10;        feedback_string += 'Falls Sie noch Fragen haben, stellen Sie diese gerne.'&amp;#10;    elif language=='english':&amp;#10;        feedback_string = 'You have detected the right order in all three examples. Congratulation!\n\n'&amp;#10;        feedback_string += 'The exercise is now complete. Please let the experimentator know you are finished.\n\n'&amp;#10;        feedback_string += 'If you have any remaining questions, please let us know.'&amp;#10;&amp;#10;    text_feedback_seq.text = feedback_string&amp;#10;&amp;#10;else:&amp;#10;    feedback_string = ''&amp;#10;    if wrong_answers:&amp;#10;        if language=='german':&amp;#10;            feedback_string += f'Sie haben {wrong_answers}x falsch geantwortet. '&amp;#10;        elif language=='english':&amp;#10;            feedback_string += f'You gave a wrong answere {wrong_answers} time(s). '&amp;#10;&amp;#10;    if misses:&amp;#10;        if language=='german':&amp;#10;            feedback_string += f'Sie haben {misses}x verpasst zu antworten. Bitte antworten Sie schnell genug! '&amp;#10;        elif language=='english':&amp;#10;            feedback_string += f'You have missed to answer {misses} time(s). Please always respond fast enough! '&amp;#10;    if language=='german':&amp;#10;        feedback_string += '\n\nFalls Sie Fragen haben, stellen Sie diese gerne dem Experimentleiter.\n'&amp;#10;        feedback_string += '\nDrücken Sie eine beliebige Taste um die Übung zu wiederholen.'&amp;#10;    elif language=='english':&amp;#10;        feedback_string += '\nIf you have any questions, please ask the experimentator now.\n'&amp;#10;        feedback_string += '\nPlease press any button to repeat the task.'&amp;#10;    text_feedback_seq.text = feedback_string&amp;#10;    &amp;#10;    # reset counters&amp;#10;    wrong_answers = 0&amp;#10;    misses = 0&amp;#10;    i_sequence = 0&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -1537,7 +1588,7 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="&amp;#10;Für jede richtige Antwort erhalten sie erneu 3ct Belohnung.&amp;#10;&amp;#10;Zwischen den Bildern wird, wie in der vorherigen Aufgabe, ein Punkt auf dem Bildschirm erscheinen ( • ). Bitte schauen Sie wenn möglich immer den Punkt an, wenn dieser auf dem Bildschirm erscheint.&amp;#10;&amp;#10;Bitte drücken Sie eine Taste um mit einer Übung zu starten.&amp;#10;&amp;#10;" valType="str" updates="constant" name="text"/>
+        <Param val="&amp;#10;Für jede richtige Antwort erhalten sie erneut 3ct Belohnung.&amp;#10;&amp;#10;Zwischen den Bildern wird, wie in der vorherigen Aufgabe, ein Punkt auf dem Bildschirm erscheinen ( • ). Bitte schauen Sie wenn möglich immer den Punkt an, wenn dieser auf dem Bildschirm erscheint.&amp;#10;&amp;#10;Bitte drücken Sie eine Taste um mit einer Übung zu starten.&amp;#10;&amp;#10;" valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
@@ -1560,6 +1611,23 @@
         <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
+      <CodeComponent name="code_instruct4" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="if ((language === &quot;english&quot;)) {&amp;#10;    text_6.text = &quot;For each correct answer you will receive a reward of 3ct.\n\nBetween the pictures, as in the previous task, a dot will appear on the screen ( \u2022 ). If possible, please always look at the dot when it appears on the screen.\n\nPlease press a button to start the task.&quot;;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if language=='english':&amp;#10;    text_6.text = &quot;&quot;&quot;For each correct answer you will receive a reward of 3ct.&amp;#10;&amp;#10;Between the pictures, as in the previous task, a dot will appear on the screen ( • ). If possible, please always look at the dot when it appears on the screen.&amp;#10;&amp;#10;Please press a button to start the task.&quot;&quot;&quot;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="code_instruct4" valType="code" updates="None" name="name"/>
+      </CodeComponent>
     </Routine>
     <Routine name="instruct_end">
       <RoutineSettingsComponent name="instruct_end" plugin="None">
@@ -1598,14 +1666,226 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="1.0" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="Die Übung ist nun beendet. &amp;#10;&amp;#10;Bitte melden Sie sich beim Experimentleider um mit dem eigentlichen Experiment zu beginnen.." valType="str" updates="constant" name="text"/>
+        <Param val="Die Übung ist nun beendet. &amp;#10;&amp;#10;Bitte melden Sie sich beim Experimentleider um mit dem eigentlichen Experiment zu beginnen..&amp;#10;&amp;#10;-------------------------&amp;#10;&amp;#10;The experiment has ended. Please let the experimentator know that you are finished, so that you can start the main experiment." valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
     </Routine>
+    <Routine name="language_selection_screen">
+      <RoutineSettingsComponent name="language_selection_screen" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="language_selection_screen" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <PolygonComponent name="english_polygon" plugin="None">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="60.0" valType="code" updates="None" name="durationEstim"/>
+        <Param val="none" valType="color" updates="constant" name="fillColor"/>
+        <Param val="linear" valType="str" updates="constant" name="interpolate"/>
+        <Param val="white" valType="color" updates="constant" name="lineColor"/>
+        <Param val="1.5" valType="num" updates="constant" name="lineWidth"/>
+        <Param val="4" valType="int" updates="constant" name="nVertices"/>
+        <Param val="english_polygon" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0.5, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="rectangle" valType="str" updates="None" name="shape"/>
+        <Param val="(0.3, 0.3)" valType="list" updates="constant" name="size"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="list" updates="constant" name="vertices"/>
+      </PolygonComponent>
+      <PolygonComponent name="german_polygon" plugin="None">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="60.0" valType="code" updates="None" name="durationEstim"/>
+        <Param val="none" valType="color" updates="constant" name="fillColor"/>
+        <Param val="linear" valType="str" updates="constant" name="interpolate"/>
+        <Param val="white" valType="color" updates="constant" name="lineColor"/>
+        <Param val="1.5" valType="num" updates="constant" name="lineWidth"/>
+        <Param val="4" valType="int" updates="constant" name="nVertices"/>
+        <Param val="german_polygon" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(-0.5, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="rectangle" valType="str" updates="None" name="shape"/>
+        <Param val="(0.3, 0.3)" valType="list" updates="constant" name="size"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="list" updates="constant" name="vertices"/>
+      </PolygonComponent>
+      <ImageComponent name="german_flag" plugin="None">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="$[1,1,1]" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="60.0" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="flipHoriz"/>
+        <Param val="False" valType="bool" updates="constant" name="flipVert"/>
+        <Param val="stimuli/german_flag.png" valType="file" updates="constant" name="image"/>
+        <Param val="linear" valType="str" updates="constant" name="interpolate"/>
+        <Param val="" valType="str" updates="constant" name="mask"/>
+        <Param val="german_flag" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(-0.5, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="(0.3, 0.3)" valType="list" updates="constant" name="size"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="128" valType="num" updates="constant" name="texture resolution"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+      </ImageComponent>
+      <ImageComponent name="english_flag" plugin="None">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="$[1,1,1]" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="60.0" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
+        <Param val="False" valType="bool" updates="constant" name="flipVert"/>
+        <Param val="stimuli/english_flag.png" valType="file" updates="constant" name="image"/>
+        <Param val="linear" valType="str" updates="constant" name="interpolate"/>
+        <Param val="" valType="str" updates="constant" name="mask"/>
+        <Param val="english_flag" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0.5, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="(0.3, 0.3)" valType="list" updates="constant" name="size"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="128" valType="num" updates="constant" name="texture resolution"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+      </ImageComponent>
+      <TextComponent name="german_text" plugin="None">
+        <Param val="-1.0000, 1.0000, -1.0000" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="60.0" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.04" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="german_text" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(-0.5, -0.25)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Drücken Sie die linke (grün) Taste für Deutsch" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <TextComponent name="english_text" plugin="None">
+        <Param val="0.0588, 0.6157, 0.9608" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="60.0" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.04" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="english_text" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0.5, -0.25)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Press the right (blue) button for English" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="choice_key" plugin="None">
+        <Param val="'g','b'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="60.0" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="choice_key" valType="code" updates="None" name="name"/>
+        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+      <CodeComponent name="choice_code" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="psychoJS.window.mouseVisible = false;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="win.mouseVisible = False" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="if ((choice_key.keys === &quot;g&quot;)) {&amp;#10;    german_polygon.borderColor = [1, 0.2941, (- 1)];&amp;#10;    language = &quot;german&quot;;&amp;#10;} else {&amp;#10;    if ((choice_key.keys === &quot;b&quot;)) {&amp;#10;        english_polygon.borderColor = [1, 0.2941, (- 1)];&amp;#10;        language = &quot;english&quot;;&amp;#10;    }&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="&amp;#10;if choice_key.keys == &quot;g&quot;:&amp;#10;    german_polygon.borderColor = [1, 0.2941, -1]&amp;#10;    language = &quot;german&quot;&amp;#10;elif choice_key.keys == &quot;b&quot;:&amp;#10;    english_polygon.borderColor = [1, 0.2941, -1]&amp;#10;    language = &quot;english&quot;" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="choice_code" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+    </Routine>
   </Routines>
   <Flow>
     <Routine name="startup_code"/>
+    <Routine name="language_selection_screen"/>
     <Routine name="instruct_welcome"/>
     <Routine name="instruct_task1"/>
     <Routine name="instruct_task1_2"/>
