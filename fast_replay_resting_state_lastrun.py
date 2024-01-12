@@ -1,8 +1,8 @@
 ﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy3 Experiment Builder (v2023.2.0),
-    on January 12, 2024, at 10:40
+This experiment was created using PsychoPy3 Experiment Builder (v2023.2.2),
+    on Januar 12, 2024, at 11:37
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -16,8 +16,8 @@ from psychopy import locale_setup
 from psychopy import prefs
 from psychopy import plugins
 plugins.activatePlugins()
-prefs.hardware['audioLib'] = 'ptb'
-prefs.hardware['audioLatencyMode'] = '3'
+prefs.hardware['audioLib'] = 'pygame'
+prefs.hardware['audioLatencyMode'] = '0'
 from psychopy import sound, gui, visual, core, data, event, logging, clock, colors, layout
 from psychopy.tools import environmenttools
 from psychopy.constants import (NOT_STARTED, STARTED, PLAYING, PAUSED,
@@ -33,20 +33,6 @@ import sys  # to get file system encoding
 import psychopy.iohub as io
 from psychopy.hardware import keyboard
 
-# --- Setup global variables (available in all functions) ---
-# Ensure that relative paths start from the same directory as this script
-_thisDir = os.path.dirname(os.path.abspath(__file__))
-# Store info about the experiment session
-psychopyVersion = '2023.2.0'
-expName = 'fast_replay_resting_state'  # from the Builder filename that created this script
-expInfo = {
-    'participant': '0',
-    'session': '1',
-    'date': data.getDateStr(),  # add a simple timestamp
-    'expName': expName,
-    'psychopyVersion': psychopyVersion,
-}
-
 # Run 'Before Experiment' code from startup
 import time
 import meg_triggers
@@ -58,6 +44,21 @@ trigger_rs_end = 2
 
 # Run 'Before Experiment' code from parameters
 rs_length = 15
+letter_height = 0.06
+# --- Setup global variables (available in all functions) ---
+# Ensure that relative paths start from the same directory as this script
+_thisDir = os.path.dirname(os.path.abspath(__file__))
+# Store info about the experiment session
+psychopyVersion = '2023.2.2'
+expName = 'fast_replay_resting_state'  # from the Builder filename that created this script
+expInfo = {
+    'participant': '0',
+    'session': '1',
+    'date': data.getDateStr(),  # add a simple timestamp
+    'expName': expName,
+    'psychopyVersion': psychopyVersion,
+}
+
 
 def showExpInfoDlg(expInfo):
     """
@@ -118,7 +119,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\ElektaStimPC\\Desktop\\MEG-highspeed-task-main\\fast_replay_resting_state_lastrun.py',
+        originPath='C:\\Users\\simon.kern\\Nextcloud\\ZI\\2023.09_MEG_Fast_Replay\\MEG-highspeed-task\\fast_replay_resting_state_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -142,10 +143,11 @@ def setupLogging(filename):
     psychopy.logging.LogFile
         Text stream to receive inputs from the logging system.
     """
+    # this outputs to the screen, not a file
+    logging.console.setLevel(logging.EXP)
     # save a log file for detail verbose info
     logFile = logging.LogFile(filename+'.log', level=logging.EXP)
-    logging.console.setLevel(logging.WARNING)  # this outputs to the screen, not a file
-    # return log file
+    
     return logFile
 
 
@@ -173,7 +175,7 @@ def setupWindow(expInfo=None, win=None):
             monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
             backgroundImage='', backgroundFit='none',
             blendMode='avg', useFBO=True,
-            units=None
+            units='norm'
         )
         if expInfo is not None:
             # store frame rate of monitor if we can measure it
@@ -184,7 +186,7 @@ def setupWindow(expInfo=None, win=None):
         win.colorSpace = 'rgb'
         win.backgroundImage = ''
         win.backgroundFit = 'none'
-        win.units = None
+        win.units = 'norm'
     win.mouseVisible = True
     win.hideMessage()
     return win
@@ -365,14 +367,14 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     german_text = visual.TextStim(win=win, name='german_text',
         text='Drücken Sie die linke (grün) Taste für Deutsch',
         font='Open Sans',
-        pos=(-0.5, -0.25), height=0.04, wrapWidth=None, ori=0.0, 
+        pos=(-0.5, -0.25), height=letter_height, wrapWidth=None, ori=0.0, 
         color=[-1.0000, 1.0000, -1.0000], colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-5.0);
     english_text = visual.TextStim(win=win, name='english_text',
         text='Press the right (blue) button for English',
         font='Open Sans',
-        pos=(0.5, -0.25), height=0.04, wrapWidth=None, ori=0.0, 
+        pos=(0.5, -0.25), height=letter_height, wrapWidth=None, ori=0.0, 
         color=[0.0588, 0.6157, 0.9608], colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-6.0);
@@ -383,7 +385,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     text_instr = visual.TextStim(win=win, name='text_instr',
         text='error',
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-1.0);
@@ -392,7 +394,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     text = visual.TextStim(win=win, name='text',
         text='+',
         font='Open Sans',
-        pos=(0, 0), height=0.06, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -401,7 +403,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     text_final = visual.TextStim(win=win, name='text_final',
         text='error',
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color='black', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -1171,7 +1173,7 @@ def quit(thisExp, win=None, inputs=None, thisSession=None):
         win.close()
     if inputs is not None:
         if 'eyetracker' in inputs and inputs['eyetracker'] is not None:
-            eyetracker.setConnectionState(False)
+            inputs['eyetracker'].setConnectionState(False)
     logging.flush()
     if thisSession is not None:
         thisSession.stop()

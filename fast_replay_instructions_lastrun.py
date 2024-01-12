@@ -1,8 +1,8 @@
 ﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-This experiment was created using PsychoPy3 Experiment Builder (v2023.2.0),
-    on January 12, 2024, at 10:49
+This experiment was created using PsychoPy3 Experiment Builder (v2023.2.2),
+    on Januar 12, 2024, at 11:43
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -16,7 +16,7 @@ from psychopy import locale_setup
 from psychopy import prefs
 from psychopy import plugins
 plugins.activatePlugins()
-prefs.hardware['audioLib'] = 'pygame'
+prefs.hardware['audioLib'] = 'sounddevice'
 prefs.hardware['audioLatencyMode'] = '0'
 from psychopy import sound, gui, visual, core, data, event, logging, clock, colors, layout
 from psychopy.tools import environmenttools
@@ -37,7 +37,7 @@ from psychopy.hardware import keyboard
 # Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__))
 # Store info about the experiment session
-psychopyVersion = '2023.2.0'
+psychopyVersion = '2023.2.2'
 expName = 'untitled'  # from the Builder filename that created this script
 expInfo = {
     'participant': '0',
@@ -106,7 +106,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\ElektaStimPC\\Desktop\\MEG-highspeed-task-main\\fast_replay_instructions_lastrun.py',
+        originPath='C:\\Users\\simon.kern\\Nextcloud\\ZI\\2023.09_MEG_Fast_Replay\\MEG-highspeed-task\\fast_replay_instructions_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -130,10 +130,11 @@ def setupLogging(filename):
     psychopy.logging.LogFile
         Text stream to receive inputs from the logging system.
     """
+    # this outputs to the screen, not a file
+    logging.console.setLevel(logging.EXP)
     # save a log file for detail verbose info
     logFile = logging.LogFile(filename+'.log', level=logging.EXP)
-    logging.console.setLevel(logging.WARNING)  # this outputs to the screen, not a file
-    # return log file
+    
     return logFile
 
 
@@ -161,7 +162,7 @@ def setupWindow(expInfo=None, win=None):
             monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
             backgroundImage='', backgroundFit='none',
             blendMode='avg', useFBO=True,
-            units=None
+            units='norm'
         )
         if expInfo is not None:
             # store frame rate of monitor if we can measure it
@@ -172,7 +173,7 @@ def setupWindow(expInfo=None, win=None):
         win.colorSpace = 'rgb'
         win.backgroundImage = ''
         win.backgroundFit = 'none'
-        win.units = None
+        win.units = 'norm'
     win.mouseVisible = True
     win.hideMessage()
     return win
@@ -326,6 +327,10 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     n_sequence_trials = 3
     
     dot_color = (-0.5, -0.5, -0.5)
+    
+    image_size = 0.25
+    
+    letter_height=0.06
     # Run 'Begin Experiment' code from startup
     import pandas as pd
     
@@ -340,8 +345,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     i_localizer = 0
     i_sequence = 0
     i_block = 0
-    
-    letter_height=0.06
     
     # store reward
     reward_count = 0
@@ -490,7 +493,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     localizer_fixation = visual.TextStim(win=win, name='localizer_fixation',
         text='•',
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color=dot_color, colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -498,16 +501,16 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # --- Initialize components for Routine "localizer" ---
     localizer_img = visual.ImageStim(
         win=win,
-        name='localizer_img', 
+        name='localizer_img', units='height', 
         image='stimuli/Gesicht.jpg', mask=None, anchor='center',
-        ori=0.0, pos=(0, 0), size=[0.25],
+        ori=0.0, pos=(0, 0), size=image_size,
         color=[1,1,1], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
         texRes=128.0, interpolate=True, depth=0.0)
     localizer_isi = visual.TextStim(win=win, name='localizer_isi',
         text=None,
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-1.0);
@@ -524,7 +527,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     text_feedback = visual.TextStim(win=win, name='text_feedback',
         text='... dummy ... something went wrong',
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-1.0);
@@ -553,7 +556,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     cue_text = visual.TextStim(win=win, name='cue_text',
         text='dummy',
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -562,7 +565,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     text = visual.TextStim(win=win, name='text',
         text=None,
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -571,7 +574,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     localizer_fixation = visual.TextStim(win=win, name='localizer_fixation',
         text='•',
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color=dot_color, colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -579,76 +582,76 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # --- Initialize components for Routine "sequence" ---
     sequence_img_1 = visual.ImageStim(
         win=win,
-        name='sequence_img_1', 
+        name='sequence_img_1', units='height', 
         image=None, mask=None, anchor='center',
-        ori=0.0, pos=(0, 0), size=(0.5, 0.5),
+        ori=0.0, pos=(0, 0), size=image_size,
         color=[1,1,1], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
         texRes=128.0, interpolate=True, depth=0.0)
     sequence_isi_1 = visual.TextStim(win=win, name='sequence_isi_1',
         text='•',
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color=dot_color, colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-1.0);
     sequence_img_2 = visual.ImageStim(
         win=win,
-        name='sequence_img_2', 
+        name='sequence_img_2', units='height', 
         image=None, mask=None, anchor='center',
-        ori=0.0, pos=(0, 0), size=(0.5, 0.5),
+        ori=0.0, pos=(0, 0), size=image_size,
         color=[1,1,1], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
         texRes=128.0, interpolate=True, depth=-2.0)
     sequence_isi_2 = visual.TextStim(win=win, name='sequence_isi_2',
         text='•',
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color=dot_color, colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-3.0);
     sequence_img_3 = visual.ImageStim(
         win=win,
-        name='sequence_img_3', 
+        name='sequence_img_3', units='height', 
         image=None, mask=None, anchor='center',
-        ori=0.0, pos=(0, 0), size=(0.5, 0.5),
+        ori=0.0, pos=(0, 0), size=image_size,
         color=[1,1,1], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
         texRes=128.0, interpolate=True, depth=-4.0)
     sequence_isi_3 = visual.TextStim(win=win, name='sequence_isi_3',
         text='•',
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color=dot_color, colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-5.0);
     sequence_img_4 = visual.ImageStim(
         win=win,
-        name='sequence_img_4', 
+        name='sequence_img_4', units='height', 
         image=None, mask=None, anchor='center',
-        ori=0.0, pos=(0, 0), size=(0.5, 0.5),
+        ori=0.0, pos=(0, 0), size=image_size,
         color=[1,1,1], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
         texRes=128.0, interpolate=True, depth=-6.0)
     sequence_isi_4 = visual.TextStim(win=win, name='sequence_isi_4',
         text='•',
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color=dot_color, colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-7.0);
     sequence_img_5 = visual.ImageStim(
         win=win,
-        name='sequence_img_5', 
+        name='sequence_img_5', units='height', 
         image=None, mask=None, anchor='center',
-        ori=0.0, pos=(0, 0), size=(0.5, 0.5),
+        ori=0.0, pos=(0, 0), size=image_size,
         color=[1,1,1], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
         texRes=128.0, interpolate=True, depth=-8.0)
     sequence_isi_5 = visual.TextStim(win=win, name='sequence_isi_5',
         text='•',
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color=dot_color, colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-9.0);
@@ -657,7 +660,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     buffer_fixation = visual.TextStim(win=win, name='buffer_fixation',
         text='•',
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color=dot_color, colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -670,7 +673,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     question_text = visual.TextStim(win=win, name='question_text',
         text='Did X come before Y?',
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-1.0);
@@ -679,7 +682,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     text_feedback__answer = visual.TextStim(win=win, name='text_feedback__answer',
         text=None,
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -689,7 +692,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     text_feedback_seq = visual.TextStim(win=win, name='text_feedback_seq',
         text='dummy... something went wrong',
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-1.0);
@@ -698,7 +701,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     text_5 = visual.TextStim(win=win, name='text_5',
         text='Die Übung ist nun beendet. \n\nBitte melden Sie sich beim Experimentleider um mit dem eigentlichen Experiment zu beginnen..\n\n-------------------------\n\nThe experiment has ended. Please let the experimentator know that you are finished, so that you can start the main experiment.',
         font='Open Sans',
-        pos=(0, 0), height=0.05, wrapWidth=None, ori=0.0, 
+        pos=(0, 0), height=letter_height, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
@@ -1006,11 +1009,9 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     _key_resp_allKeys = []
     textbox_3.reset()
     # Run 'Begin Routine' code from code
-    
-    
     for i, img in enumerate([image, image_2, image_3, image_4, image_5]):
-        img.pos = [(i-2)/4, -0.6]
-        img.size = 0.2
+        img.pos = [(i-2)/3, -0.6]
+        #img.size = 0.2
         
     if language=='english':
         print('selected english')
@@ -1667,8 +1668,10 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             _key_resp_localizer_allKeys = []
             sound_correct.setSound('sounds/soundCoin.wav', secs=0.5, hamming=True)
             sound_correct.setVolume(1.0, log=False)
+            sound_correct.seek(0)
             sound_wrong.setSound('sounds/soundError.wav', secs=0.5, hamming=True)
             sound_wrong.setVolume(1.0, log=False)
+            sound_wrong.seek(0)
             # Run 'Begin Routine' code from localizer_code
             df_block = df_localizer[df_localizer['block']==i_block].reset_index()
             df_trial = df_block.iloc[i_localizer]
@@ -1937,8 +1940,8 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             if key_resp_localizer.keys != None:  # we had a response
                 localizer_trials.addData('key_resp_localizer.rt', key_resp_localizer.rt)
                 localizer_trials.addData('key_resp_localizer.duration', key_resp_localizer.duration)
-            sound_correct.stop()  # ensure sound has stopped at end of Routine
-            sound_wrong.stop()  # ensure sound has stopped at end of Routine
+            sound_correct.pause()  # ensure sound has stopped at end of Routine
+            sound_wrong.pause()  # ensure sound has stopped at end of Routine
             # Run 'End Routine' code from localizer_code
             i_localizer+=1
             # the Routine "localizer" was not non-slip safe, so reset the non-slip timer
@@ -3121,6 +3124,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             thisExp.addData('buffer.started', globalClock.getTime())
             sound_birds.setSound('sounds/soundWait.wav', secs=t_buffer - (5*t_img_sequence + 5*t_isi), hamming=True)
             sound_birds.setVolume(1.0, log=False)
+            sound_birds.seek(0)
             # keep track of which components have finished
             bufferComponents = [buffer_fixation, sound_birds]
             for thisComponent in bufferComponents:
@@ -3237,7 +3241,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 if hasattr(thisComponent, "setAutoDraw"):
                     thisComponent.setAutoDraw(False)
             thisExp.addData('buffer.stopped', globalClock.getTime())
-            sound_birds.stop()  # ensure sound has stopped at end of Routine
+            sound_birds.pause()  # ensure sound has stopped at end of Routine
             # the Routine "buffer" was not non-slip safe, so reset the non-slip timer
             routineTimer.reset()
             
@@ -3847,7 +3851,7 @@ def quit(thisExp, win=None, inputs=None, thisSession=None):
         win.close()
     if inputs is not None:
         if 'eyetracker' in inputs and inputs['eyetracker'] is not None:
-            eyetracker.setConnectionState(False)
+            inputs['eyetracker'].setConnectionState(False)
     logging.flush()
     if thisSession is not None:
         thisSession.stop()

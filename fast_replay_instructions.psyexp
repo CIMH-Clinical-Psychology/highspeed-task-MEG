@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" ?>
-<PsychoPy2experiment encoding="utf-8" version="2023.2.0">
+<PsychoPy2experiment encoding="utf-8" version="2023.2.2">
   <Settings>
     <Param val="0" valType="str" updates="None" name="Audio latency priority"/>
-    <Param val="pygame" valType="str" updates="None" name="Audio lib"/>
+    <Param val="sounddevice" valType="str" updates="None" name="Audio lib"/>
     <Param val="" valType="str" updates="None" name="Completed URL"/>
     <Param val="auto" valType="str" updates="None" name="Data file delimiter"/>
     <Param val="u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code" updates="None" name="Data filename"/>
@@ -24,7 +24,7 @@
     <Param val="2" valType="num" updates="None" name="Screen"/>
     <Param val="False" valType="bool" updates="None" name="Show info dlg"/>
     <Param val="False" valType="bool" updates="None" name="Show mouse"/>
-    <Param val="use prefs" valType="str" updates="None" name="Units"/>
+    <Param val="norm" valType="str" updates="None" name="Units"/>
     <Param val="" valType="str" updates="None" name="Use version"/>
     <Param val="[1400,1050]" valType="list" updates="None" name="Window size (pixels)"/>
     <Param val="none" valType="str" updates="None" name="backgroundFit"/>
@@ -102,7 +102,7 @@
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="0.25" valType="list" updates="constant" name="size"/>
+        <Param val="$image_size" valType="list" updates="constant" name="size"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0" valType="code" updates="None" name="startVal"/>
@@ -110,7 +110,7 @@
         <Param val="$t_img_localizer" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="128" valType="num" updates="constant" name="texture resolution"/>
-        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="height" valType="str" updates="None" name="units"/>
       </ImageComponent>
       <TextComponent name="localizer_isi" plugin="None">
         <Param val="white" valType="color" updates="constant" name="color"/>
@@ -121,7 +121,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
         <Param val="localizer_isi" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -239,7 +239,7 @@
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="(0.5, 0.5)" valType="list" updates="constant" name="size"/>
+        <Param val="$image_size" valType="list" updates="constant" name="size"/>
         <Param val="0.0" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0" valType="code" updates="None" name="startVal"/>
@@ -247,7 +247,7 @@
         <Param val="$t_img_sequence" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="128" valType="num" updates="constant" name="texture resolution"/>
-        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="height" valType="str" updates="None" name="units"/>
       </ImageComponent>
       <TextComponent name="sequence_isi_1" plugin="None">
         <Param val="$dot_color" valType="color" updates="constant" name="color"/>
@@ -258,7 +258,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
         <Param val="sequence_isi_1" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -291,7 +291,7 @@
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="(0.5, 0.5)" valType="list" updates="constant" name="size"/>
+        <Param val="$image_size" valType="list" updates="constant" name="size"/>
         <Param val="0.164" valType="code" updates="None" name="startEstim"/>
         <Param val="condition" valType="str" updates="None" name="startType"/>
         <Param val="$sequence_isi_1.status==FINISHED" valType="code" updates="None" name="startVal"/>
@@ -299,7 +299,7 @@
         <Param val="$t_img_sequence" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="128" valType="num" updates="constant" name="texture resolution"/>
-        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="height" valType="str" updates="None" name="units"/>
       </ImageComponent>
       <TextComponent name="sequence_isi_2" plugin="None">
         <Param val="$dot_color" valType="color" updates="constant" name="color"/>
@@ -310,7 +310,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
         <Param val="sequence_isi_2" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -343,7 +343,7 @@
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="(0.5, 0.5)" valType="list" updates="constant" name="size"/>
+        <Param val="$image_size" valType="list" updates="constant" name="size"/>
         <Param val="0.328" valType="code" updates="None" name="startEstim"/>
         <Param val="condition" valType="str" updates="None" name="startType"/>
         <Param val="$sequence_isi_2.status==FINISHED" valType="code" updates="None" name="startVal"/>
@@ -351,7 +351,7 @@
         <Param val="$t_img_sequence" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="128" valType="num" updates="constant" name="texture resolution"/>
-        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="height" valType="str" updates="None" name="units"/>
       </ImageComponent>
       <TextComponent name="sequence_isi_3" plugin="None">
         <Param val="$dot_color" valType="color" updates="constant" name="color"/>
@@ -362,7 +362,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
         <Param val="sequence_isi_3" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -395,7 +395,7 @@
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="(0.5, 0.5)" valType="list" updates="constant" name="size"/>
+        <Param val="$image_size" valType="list" updates="constant" name="size"/>
         <Param val="0.492" valType="code" updates="None" name="startEstim"/>
         <Param val="condition" valType="str" updates="None" name="startType"/>
         <Param val="$sequence_isi_3.status==FINISHED" valType="code" updates="None" name="startVal"/>
@@ -403,7 +403,7 @@
         <Param val="$t_img_sequence" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="128" valType="num" updates="constant" name="texture resolution"/>
-        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="height" valType="str" updates="None" name="units"/>
       </ImageComponent>
       <TextComponent name="sequence_isi_4" plugin="None">
         <Param val="$dot_color" valType="color" updates="constant" name="color"/>
@@ -414,7 +414,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
         <Param val="sequence_isi_4" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -447,7 +447,7 @@
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="(0.5, 0.5)" valType="list" updates="constant" name="size"/>
+        <Param val="$image_size" valType="list" updates="constant" name="size"/>
         <Param val="0.656" valType="code" updates="None" name="startEstim"/>
         <Param val="condition" valType="str" updates="None" name="startType"/>
         <Param val="$sequence_isi_4.status==FINISHED" valType="code" updates="None" name="startVal"/>
@@ -455,7 +455,7 @@
         <Param val="$t_img_sequence" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="128" valType="num" updates="constant" name="texture resolution"/>
-        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="height" valType="str" updates="None" name="units"/>
       </ImageComponent>
       <TextComponent name="sequence_isi_5" plugin="None">
         <Param val="$dot_color" valType="color" updates="constant" name="color"/>
@@ -466,7 +466,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
         <Param val="sequence_isi_5" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -519,8 +519,8 @@
       <CodeComponent name="settings" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="t_img_sequence = 0.1&amp;#10;t_img_localizer = 0.5&amp;#10;t_isi_localizer = 2.0&amp;#10;&amp;#10;t_buffer = 8&amp;#10;&amp;#10;reward_amount = 0.03  # +-3 ct per trial&amp;#10;&amp;#10;n_localizer_trials = 5&amp;#10;n_sequence_trials = 3&amp;#10;&amp;#10;dot_color = (-0.5, -0.5, -0.5)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="t_img_sequence = 0.1;&amp;#10;t_img_localizer = 0.5;&amp;#10;t_isi_localizer = 2.0;&amp;#10;t_buffer = 8;&amp;#10;reward_amount = 0.03;&amp;#10;n_localizer_trials = 5;&amp;#10;n_sequence_trials = 3;&amp;#10;dot_color = [(- 0.5), (- 0.5), (- 0.5)];&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="t_img_sequence = 0.1&amp;#10;t_img_localizer = 0.5&amp;#10;t_isi_localizer = 2.0&amp;#10;&amp;#10;t_buffer = 8&amp;#10;&amp;#10;reward_amount = 0.03  # +-3 ct per trial&amp;#10;&amp;#10;n_localizer_trials = 5&amp;#10;n_sequence_trials = 3&amp;#10;&amp;#10;dot_color = (-0.5, -0.5, -0.5)&amp;#10;&amp;#10;image_size = 0.25&amp;#10;&amp;#10;letter_height=0.06" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="t_img_sequence = 0.1;&amp;#10;t_img_localizer = 0.5;&amp;#10;t_isi_localizer = 2.0;&amp;#10;t_buffer = 8;&amp;#10;reward_amount = 0.03;&amp;#10;n_localizer_trials = 5;&amp;#10;n_sequence_trials = 3;&amp;#10;dot_color = [(- 0.5), (- 0.5), (- 0.5)];&amp;#10;image_size = 0.25;&amp;#10;letter_height = 0.06;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
@@ -536,8 +536,8 @@
       <CodeComponent name="startup" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="import pandas as pd&amp;#10;&amp;#10;subj_id = 0&amp;#10;&amp;#10;df_localizer = pd.read_csv(f'./sequences/localizer_{subj_id}.csv')&amp;#10;df_sequences = pd.read_csv(f'./sequences/sequences_{subj_id}.csv')&amp;#10;&amp;#10;print('DUMMY TRIALS: subj_id is set to 0')&amp;#10;&amp;#10;# set variables we will access later&amp;#10;i_localizer = 0&amp;#10;i_sequence = 0&amp;#10;i_block = 0&amp;#10;&amp;#10;letter_height=0.06&amp;#10;&amp;#10;# store reward&amp;#10;reward_count = 0&amp;#10;false_alarms = 0&amp;#10;misses = 0&amp;#10;wrong_answers = 0&amp;#10;&amp;#10;# set the number of repetitions we have&amp;#10;n_blocks = 1&amp;#10;n_localizer_trials = 6&amp;#10;n_sequence_trials = 3" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="import * as pd from 'pandas';&amp;#10;subj_id = 0;&amp;#10;df_localizer = pd.read_csv(`./sequences/localizer_${subj_id}.csv`);&amp;#10;df_sequences = pd.read_csv(`./sequences/sequences_${subj_id}.csv`);&amp;#10;console.log(&quot;DUMMY TRIALS: subj_id is set to 0&quot;);&amp;#10;i_localizer = 0;&amp;#10;i_sequence = 0;&amp;#10;i_block = 0;&amp;#10;letter_height = 0.06;&amp;#10;reward_count = 0;&amp;#10;false_alarms = 0;&amp;#10;misses = 0;&amp;#10;wrong_answers = 0;&amp;#10;n_blocks = 1;&amp;#10;n_localizer_trials = 6;&amp;#10;n_sequence_trials = 3;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="import pandas as pd&amp;#10;&amp;#10;subj_id = 0&amp;#10;&amp;#10;df_localizer = pd.read_csv(f'./sequences/localizer_{subj_id}.csv')&amp;#10;df_sequences = pd.read_csv(f'./sequences/sequences_{subj_id}.csv')&amp;#10;&amp;#10;print('DUMMY TRIALS: subj_id is set to 0')&amp;#10;&amp;#10;# set variables we will access later&amp;#10;i_localizer = 0&amp;#10;i_sequence = 0&amp;#10;i_block = 0&amp;#10;&amp;#10;# store reward&amp;#10;reward_count = 0&amp;#10;false_alarms = 0&amp;#10;misses = 0&amp;#10;wrong_answers = 0&amp;#10;&amp;#10;# set the number of repetitions we have&amp;#10;n_blocks = 1&amp;#10;n_localizer_trials = 6&amp;#10;n_sequence_trials = 3" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="import * as pd from 'pandas';&amp;#10;subj_id = 0;&amp;#10;df_localizer = pd.read_csv(`./sequences/localizer_${subj_id}.csv`);&amp;#10;df_sequences = pd.read_csv(`./sequences/sequences_${subj_id}.csv`);&amp;#10;console.log(&quot;DUMMY TRIALS: subj_id is set to 0&quot;);&amp;#10;i_localizer = 0;&amp;#10;i_sequence = 0;&amp;#10;i_block = 0;&amp;#10;reward_count = 0;&amp;#10;false_alarms = 0;&amp;#10;misses = 0;&amp;#10;wrong_answers = 0;&amp;#10;n_blocks = 1;&amp;#10;n_localizer_trials = 6;&amp;#10;n_sequence_trials = 3;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
@@ -576,7 +576,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
         <Param val="buffer_fixation" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -670,7 +670,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
         <Param val="question_text" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -729,7 +729,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
         <Param val="cue_text" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -788,7 +788,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
         <Param val="localizer_fixation" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -830,7 +830,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
         <Param val="text" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -872,7 +872,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
         <Param val="text_feedback__answer" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -1227,7 +1227,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="&amp;#10;&amp;#10;for i, img in enumerate([image, image_2, image_3, image_4, image_5]):&amp;#10;    img.pos = [(i-2)/4, -0.6]&amp;#10;    img.size = 0.2&amp;#10;    &amp;#10;if language=='english':&amp;#10;    print('selected english')&amp;#10;    textbox_3.setText(&quot;&quot;&quot;\n\nWelcome to the study&amp;#10;&lt;b&gt;“Recognizing Visual Objects”&lt;/b&gt;&amp;#10;&amp;#10;The experiment “Recognizing Visual Objects” consists of two tasks in which we show you pictures of everyday objects. You should always look closely at each picture. During the experiment, you will alternate between two different tasks, which we will now explain in detail.&amp;#10;&amp;#10;Press any button to continue.&quot;&quot;&quot;)&amp;#10;    textbox_3.draw()" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="for i, img in enumerate([image, image_2, image_3, image_4, image_5]):&amp;#10;    img.pos = [(i-2)/3, -0.6]&amp;#10;    #img.size = 0.2&amp;#10;    &amp;#10;if language=='english':&amp;#10;    print('selected english')&amp;#10;    textbox_3.setText(&quot;&quot;&quot;\n\nWelcome to the study&amp;#10;&lt;b&gt;“Recognizing Visual Objects”&lt;/b&gt;&amp;#10;&amp;#10;The experiment “Recognizing Visual Objects” consists of two tasks in which we show you pictures of everyday objects. You should always look closely at each picture. During the experiment, you will alternate between two different tasks, which we will now explain in detail.&amp;#10;&amp;#10;Press any button to continue.&quot;&quot;&quot;)&amp;#10;    textbox_3.draw()" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -1361,7 +1361,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
         <Param val="text_feedback" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -1517,7 +1517,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
         <Param val="text_feedback_seq" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -1654,7 +1654,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
         <Param val="text_5" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -1664,9 +1664,9 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="1.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="5" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="Die Übung ist nun beendet. &amp;#10;&amp;#10;Bitte melden Sie sich beim Experimentleider um mit dem eigentlichen Experiment zu beginnen..&amp;#10;&amp;#10;-------------------------&amp;#10;&amp;#10;The experiment has ended. Please let the experimentator know that you are finished, so that you can start the main experiment." valType="str" updates="constant" name="text"/>
+        <Param val="Die Übung ist nun beendet. &amp;#10;&amp;#10;Bitte melden Sie sich beim Experimentleider um mit dem eigentlichen Experiment zu beginnen.&amp;#10;&amp;#10;-------------------------&amp;#10;&amp;#10;The experiment has ended. Please let the experimentator know that you are finished, so that you can start the main experiment." valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>

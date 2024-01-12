@@ -183,7 +183,7 @@ n_blocks = 8
 seq_per_subj = 8
 n_subj = 30
 speeds = [32, 64, 128, 512]
-images = os.listdir('./stimuli')
+images = [x for x in os.listdir('./stimuli') if not 'flag' in x]
 
 stimuli = {chr(65+i):f'./stimuli/{file}' for i, file  in enumerate(images)}
 items = 'ABCDE'
@@ -258,10 +258,13 @@ for subj in range(n_subj):
             df_localizer.loc[:, 'distractor'] = 0
             df_localizer.loc[1, 'distractor'] = 1
             df_localizer.loc[3, 'distractor'] = 1
+            df_localizer.loc[5, 'img'] = './stimuli/Katze.jpg'
+            df_localizer.loc[6, 'img'] = './stimuli/Katze.jpg'
+            
             df_sequences.loc[0, 'isi'] = 128
             df_sequences.loc[1, 'isi'] = 256
             df_sequences.loc[2, 'isi'] = 64
-
+            
     df_localizer.to_csv(localizer_file)
     df_sequences.to_csv(sequences_file)
     print(f'{subj} {exp_time:.1f} seconds')
