@@ -8,7 +8,7 @@ Created on Fri Oct 27 15:00:47 2023
 import os
 import random
 import warnings
-from itertools import product, permutations
+from itertools import product, permutations, groupby
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
@@ -183,6 +183,9 @@ n_blocks = 8
 seq_per_subj = 8
 n_subj = 30
 speeds = [32, 64, 128, 512]
+
+max_reward = 500  # maximum reward to obtain in cents
+
 images = [x for x in os.listdir('./stimuli') if not 'flag' in x]
 
 stimuli = {chr(65+i):f'./stimuli/{file}' for i, file  in enumerate(images)}
@@ -267,4 +270,19 @@ for subj in range(n_subj):
             
     df_localizer.to_csv(localizer_file)
     df_sequences.to_csv(sequences_file)
+    
     print(f'{subj} {exp_time:.1f} seconds')
+    
+    # sanity checks
+    assert max([len(x) for x in groupby(df_localizer.img)])<=2
+    assert len(set([len(np.unique([x for x in r if '/' in str(x)])) for _, r in df_sequences.iterrows()]))==1
+
+    
+n_distractors = sum(df_localizer.distractor)
+n_sequences = len(df_sequences)
+n_reward = int(np.round(max_reward/(n_sequences+n_distractors)))
+print(f'\n\n{n_sequences} sequence trials')
+print(f'{n_distractors} distractor trials')
+print(f'reward_per_trial = {n_reward} ct')
+with open('reward_in_cent.txt', 'w') as f:
+    f.write(str(n_reward))

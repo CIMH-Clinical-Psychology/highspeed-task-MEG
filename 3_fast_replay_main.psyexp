@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" ?>
-<PsychoPy2experiment encoding="utf-8" version="2023.2.0">
+<PsychoPy2experiment encoding="utf-8" version="2023.2.2">
   <Settings>
     <Param val="0" valType="str" updates="None" name="Audio latency priority"/>
-    <Param val="pygame" valType="str" updates="None" name="Audio lib"/>
+    <Param val="sounddevice" valType="str" updates="None" name="Audio lib"/>
     <Param val="" valType="str" updates="None" name="Completed URL"/>
-    <Param val="auto" valType="str" updates="None" name="Data file delimiter"/>
+    <Param val="comma" valType="str" updates="None" name="Data file delimiter"/>
     <Param val="u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code" updates="None" name="Data filename"/>
     <Param val="True" valType="bool" updates="None" name="Enable Escape"/>
     <Param val="" valType="str" updates="None" name="End Message"/>
@@ -196,7 +196,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="df_block = df_localizer[df_localizer['block']==i_block].reset_index()&amp;#10;df_trial = df_block.iloc[i_localizer]&amp;#10;&amp;#10;localizer_img.image = df_trial.img&amp;#10;t_isi_localizer = df_trial.isi&amp;#10;is_distractor = df_trial.distractor&amp;#10;&amp;#10;# prevent inactive sound from blocking trial finish&amp;#10;sound_correct.status = FINISHED&amp;#10;sound_wrong.status = FINISHED&amp;#10;&amp;#10;played = False&amp;#10;&amp;#10;if is_distractor:&amp;#10;    localizer_img.ori  = 180&amp;#10;else:&amp;#10;    localizer_img.ori  = 0&amp;#10;&amp;#10;msg = f'localizer {i_localizer}/{len(df_block)}'&amp;#10;msg += f' block {i_block}/{max(df_localizer[&quot;block&quot;])} {&quot;[FLIPPED]&quot; if is_distractor else &quot;&quot;} isi={t_isi_localizer:.2f}s'&amp;#10;print(msg)" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
-        <Param val="if frameN == 0:&amp;#10;    img_idx = trigger_img[get_image_name(df_trial.img)]&amp;#10;    send_trigger(trigger_base_val_localizer + img_idx)&amp;#10;&amp;#10;# play for wrong/correct button presses&amp;#10;if len(key_resp_localizer.keys) and not played:&amp;#10;    played = True&amp;#10;    if is_distractor:&amp;#10;        sound_correct.play()&amp;#10;        reward_count += reward_amount &amp;#10;        print('Correct press')&amp;#10;        send_trigger(trigger_localizer_sound1)&amp;#10;    else:&amp;#10;        sound_wrong.play()&amp;#10;        reward_count -= reward_amount &amp;#10;        false_alarms += 1&amp;#10;        print('False alarm')&amp;#10;        send_trigger(trigger_localizer_sound0)&amp;#10;&amp;#10;# play error in case of missed button press&amp;#10;if is_distractor and key_resp_localizer.status==FINISHED and not played:&amp;#10;    played = True&amp;#10;    sound_wrong.play()&amp;#10;    misses += 1&amp;#10;    print('Miss')&amp;#10;    send_trigger(trigger_localizer_sound0)&amp;#10;    reward_count -= reward_amount &amp;#10;&amp;#10;sound_correct.status = FINISHED&amp;#10;sound_wrong.status = FINISHED" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="if frameN == 0:&amp;#10;    img_idx = trigger_img[get_image_name(df_trial.img)]&amp;#10;    send_trigger(trigger_base_val_localizer + img_idx)&amp;#10;&amp;#10;# play for wrong/correct button presses&amp;#10;if len(key_resp_localizer.keys) and not played:&amp;#10;    played = True&amp;#10;    if is_distractor:&amp;#10;        sound_correct.play()&amp;#10;        reward_count += reward_in_ct &amp;#10;        print('Correct press')&amp;#10;        send_trigger(trigger_localizer_sound1)&amp;#10;    else:&amp;#10;        sound_wrong.play()&amp;#10;        reward_count -= reward_in_ct &amp;#10;        false_alarms += 1&amp;#10;        print('False alarm')&amp;#10;        send_trigger(trigger_localizer_sound0)&amp;#10;&amp;#10;# play error in case of missed button press&amp;#10;if is_distractor and key_resp_localizer.status==FINISHED and not played:&amp;#10;    played = True&amp;#10;    sound_wrong.play()&amp;#10;    misses += 1&amp;#10;    print('Miss')&amp;#10;    send_trigger(trigger_localizer_sound0)&amp;#10;    reward_count -= reward_in_ct &amp;#10;&amp;#10;sound_correct.status = FINISHED&amp;#10;sound_wrong.status = FINISHED" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
@@ -519,8 +519,8 @@
       <CodeComponent name="settings" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="t_img_sequence = 0.1&amp;#10;t_img_localizer = 0.5&amp;#10;t_isi_localizer = 2.0&amp;#10;t_buffer = 8&amp;#10;&amp;#10;image_size = 0.25&amp;#10;&amp;#10;letter_height=0.06&amp;#10;&amp;#10; # show break after these blocks&amp;#10;breaks_after_block = [2, 4, 6] &amp;#10;&amp;#10;reward_amount = 0.03  # +-3 ct per trial&amp;#10;&amp;#10;n_localizer_trials = 5&amp;#10;n_sequence_trials = 3&amp;#10;&amp;#10;dot_color = (-0.5, -0.5, -0.5)&amp;#10;&amp;#10;trigger_img = {}&amp;#10;trigger_img['Gesicht'] = 1&amp;#10;trigger_img['Haus']   = 2&amp;#10;trigger_img['Katze']   = 3&amp;#10;trigger_img['Schuh']   = 4&amp;#10;trigger_img['Stuhl']   = 5&amp;#10;&amp;#10;trigger_break_start = 91&amp;#10;trigger_break_stop = 92&amp;#10;trigger_buf_start = 61&amp;#10;trigger_buf_stop = 62&amp;#10;trigger_sequence_sound0 = 70&amp;#10;trigger_sequence_sound1 = 71&amp;#10;trigger_localizer_sound0 = 30&amp;#10;trigger_localizer_sound1 = 31&amp;#10;trigger_fixation_pre1 = 81&amp;#10;trigger_fixation_pre2 = 82&amp;#10;&amp;#10;# these get added depending on the trial&amp;#10;# ie. Gesicht in localizer = 1, as cue = 11, as sequence=21&amp;#10;trigger_base_val_localizer = 0&amp;#10;trigger_base_val_cue = 10&amp;#10;trigger_base_val_sequence = 20&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="t_img_sequence = 0.1;&amp;#10;t_img_localizer = 0.5;&amp;#10;t_isi_localizer = 2.0;&amp;#10;t_buffer = 8;&amp;#10;image_size = 0.25;&amp;#10;letter_height = 0.06;&amp;#10;breaks_after_block = [2, 4, 6];&amp;#10;reward_amount = 0.03;&amp;#10;n_localizer_trials = 5;&amp;#10;n_sequence_trials = 3;&amp;#10;dot_color = [(- 0.5), (- 0.5), (- 0.5)];&amp;#10;trigger_img = {};&amp;#10;trigger_img[&quot;Gesicht&quot;] = 1;&amp;#10;trigger_img[&quot;Haus&quot;] = 2;&amp;#10;trigger_img[&quot;Katze&quot;] = 3;&amp;#10;trigger_img[&quot;Schuh&quot;] = 4;&amp;#10;trigger_img[&quot;Stuhl&quot;] = 5;&amp;#10;trigger_break_start = 91;&amp;#10;trigger_break_stop = 92;&amp;#10;trigger_buf_start = 61;&amp;#10;trigger_buf_stop = 62;&amp;#10;trigger_sequence_sound0 = 70;&amp;#10;trigger_sequence_sound1 = 71;&amp;#10;trigger_localizer_sound0 = 30;&amp;#10;trigger_localizer_sound1 = 31;&amp;#10;trigger_fixation_pre1 = 81;&amp;#10;trigger_fixation_pre2 = 82;&amp;#10;trigger_base_val_localizer = 0;&amp;#10;trigger_base_val_cue = 10;&amp;#10;trigger_base_val_sequence = 20;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="t_img_sequence = 0.1&amp;#10;t_img_localizer = 0.5&amp;#10;t_isi_localizer = 2.0&amp;#10;t_buffer = 8&amp;#10;&amp;#10;image_size = 0.25&amp;#10;&amp;#10;letter_height=0.06&amp;#10;&amp;#10; # show break after these blocks&amp;#10;breaks_after_block = [2, 4, 6] &amp;#10;&amp;#10;n_localizer_trials = 5&amp;#10;n_sequence_trials = 3&amp;#10;&amp;#10;dot_color = (-0.5, -0.5, -0.5)&amp;#10;&amp;#10;trigger_img = {}&amp;#10;trigger_img['Gesicht'] = 1&amp;#10;trigger_img['Haus']   = 2&amp;#10;trigger_img['Katze']   = 3&amp;#10;trigger_img['Schuh']   = 4&amp;#10;trigger_img['Stuhl']   = 5&amp;#10;&amp;#10;trigger_break_start = 91&amp;#10;trigger_break_stop = 92&amp;#10;trigger_buf_start = 61&amp;#10;trigger_buf_stop = 62&amp;#10;trigger_sequence_sound0 = 70&amp;#10;trigger_sequence_sound1 = 71&amp;#10;trigger_localizer_sound0 = 30&amp;#10;trigger_localizer_sound1 = 31&amp;#10;trigger_fixation_pre1 = 81&amp;#10;trigger_fixation_pre2 = 82&amp;#10;&amp;#10;# these get added depending on the trial&amp;#10;# ie. Gesicht in localizer = 1, as cue = 11, as sequence=21&amp;#10;trigger_base_val_localizer = 0&amp;#10;trigger_base_val_cue = 10&amp;#10;trigger_base_val_sequence = 20&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="t_img_sequence = 0.1;&amp;#10;t_img_localizer = 0.5;&amp;#10;t_isi_localizer = 2.0;&amp;#10;t_buffer = 8;&amp;#10;image_size = 0.25;&amp;#10;letter_height = 0.06;&amp;#10;breaks_after_block = [2, 4, 6];&amp;#10;n_localizer_trials = 5;&amp;#10;n_sequence_trials = 3;&amp;#10;dot_color = [(- 0.5), (- 0.5), (- 0.5)];&amp;#10;trigger_img = {};&amp;#10;trigger_img[&quot;Gesicht&quot;] = 1;&amp;#10;trigger_img[&quot;Haus&quot;] = 2;&amp;#10;trigger_img[&quot;Katze&quot;] = 3;&amp;#10;trigger_img[&quot;Schuh&quot;] = 4;&amp;#10;trigger_img[&quot;Stuhl&quot;] = 5;&amp;#10;trigger_break_start = 91;&amp;#10;trigger_break_stop = 92;&amp;#10;trigger_buf_start = 61;&amp;#10;trigger_buf_stop = 62;&amp;#10;trigger_sequence_sound0 = 70;&amp;#10;trigger_sequence_sound1 = 71;&amp;#10;trigger_localizer_sound0 = 30;&amp;#10;trigger_localizer_sound1 = 31;&amp;#10;trigger_fixation_pre1 = 81;&amp;#10;trigger_fixation_pre2 = 82;&amp;#10;trigger_base_val_localizer = 0;&amp;#10;trigger_base_val_cue = 10;&amp;#10;trigger_base_val_sequence = 20;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
@@ -536,13 +536,13 @@
       <CodeComponent name="startup" plugin="None">
         <Param val="import meg_triggers&amp;#10;from meg_triggers import send_trigger&amp;#10;meg_triggers.set_default_duration(0.005)&amp;#10;" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="import * as meg_triggers from 'meg_triggers';&amp;#10;import {send_trigger} from 'meg_triggers';&amp;#10;meg_triggers.set_default_duration(0.005);&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="import pandas as pd&amp;#10;&amp;#10;subj_id = expInfo['participant']&amp;#10;&amp;#10;df_localizer = pd.read_csv(f'./sequences/localizer_{subj_id}.csv')&amp;#10;df_sequences = pd.read_csv(f'./sequences/sequences_{subj_id}.csv')&amp;#10;&amp;#10;# set variables we will access later&amp;#10;i_localizer = 0&amp;#10;i_sequence = 0&amp;#10;i_block = 0&amp;#10;&amp;#10;# store reward&amp;#10;reward_count = 0&amp;#10;false_alarms = 0&amp;#10;misses = 0&amp;#10;wrong_answers = 0&amp;#10;&amp;#10;# set the number of repetitions we have&amp;#10;n_blocks = max(df_localizer.block)&amp;#10;n_localizer_trials = max(df_localizer.trial)&amp;#10;n_sequence_trials = max(df_sequences.trial)" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="import * as pd from 'pandas';&amp;#10;subj_id = expInfo[&quot;participant&quot;];&amp;#10;df_localizer = pd.read_csv(`./sequences/localizer_${subj_id}.csv`);&amp;#10;df_sequences = pd.read_csv(`./sequences/sequences_${subj_id}.csv`);&amp;#10;i_localizer = 0;&amp;#10;i_sequence = 0;&amp;#10;i_block = 0;&amp;#10;reward_count = 0;&amp;#10;false_alarms = 0;&amp;#10;misses = 0;&amp;#10;wrong_answers = 0;&amp;#10;n_blocks = Math.max(df_localizer.block);&amp;#10;n_localizer_trials = Math.max(df_localizer.trial);&amp;#10;n_sequence_trials = Math.max(df_sequences.trial);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="import pandas as pd&amp;#10;&amp;#10;subj_id = expInfo['participant']&amp;#10;&amp;#10;df_localizer = pd.read_csv(f'./sequences/localizer_{subj_id}.csv')&amp;#10;df_sequences = pd.read_csv(f'./sequences/sequences_{subj_id}.csv')&amp;#10;&amp;#10;# set variables we will access later&amp;#10;i_localizer = 0&amp;#10;i_sequence = 0&amp;#10;i_block = 0&amp;#10;&amp;#10;# store reward&amp;#10;reward_count = 0&amp;#10;false_alarms = 0&amp;#10;misses = 0&amp;#10;wrong_answers = 0&amp;#10;&amp;#10;# set the number of repetitions we have&amp;#10;n_blocks = max(df_localizer.block)&amp;#10;n_localizer_trials = max(df_localizer.trial)&amp;#10;n_sequence_trials = max(df_sequences.trial)&amp;#10;&amp;#10;with open('./reward_in_ct.txt', 'r') as f:&amp;#10;    reward_in_ct = int(f.read().strip())" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="/* Syntax Error: Fix Python code */" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
-        <Param val="sound_wait.status=FINISHED" valType="extendedCode" updates="constant" name="Each Frame"/>
-        <Param val="sound_wait.status = PsychoJS.Status.FINISHED;&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="sound_birds.status=FINISHED" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="sound_birds.status = PsychoJS.Status.FINISHED;&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
@@ -567,13 +567,13 @@
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="functions" valType="code" updates="None" name="name"/>
       </CodeComponent>
-      <SoundComponent name="sound_wait" plugin="None">
+      <SoundComponent name="sound_birds" plugin="None">
         <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="8" valType="code" updates="None" name="durationEstim"/>
         <Param val="True" valType="bool" updates="constant" name="hamming"/>
-        <Param val="sound_wait" valType="code" updates="None" name="name"/>
+        <Param val="sound_birds" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="sounds/soundWait.wav" valType="str" updates="constant" name="sound"/>
+        <Param val="sounds/soundWait.ogg" valType="str" updates="constant" name="sound"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="" valType="code" updates="None" name="startVal"/>
@@ -625,32 +625,16 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <SoundComponent name="sound_birds" plugin="None">
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
-        <Param val="8" valType="code" updates="None" name="durationEstim"/>
-        <Param val="True" valType="bool" updates="constant" name="hamming"/>
-        <Param val="sound_birds" valType="code" updates="None" name="name"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="sounds/soundWait.wav" valType="str" updates="constant" name="sound"/>
-        <Param val="" valType="code" updates="None" name="startEstim"/>
-        <Param val="time (s)" valType="str" updates="None" name="startType"/>
-        <Param val="0.0" valType="code" updates="None" name="startVal"/>
-        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="$t_buffer - (5*t_img_sequence + 5*t_isi)" valType="code" updates="constant" name="stopVal"/>
-        <Param val="True" valType="bool" updates="constant" name="stopWithRoutine"/>
-        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
-        <Param val="1" valType="num" updates="constant" name="volume"/>
-      </SoundComponent>
       <CodeComponent name="buffer_code" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="sound_stopped = false;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="sound_stopped = False" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="send_trigger(trigger_buf_start);&amp;#10;sound_birds.track.start({&quot;resume&quot;: 1});&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="send_trigger(trigger_buf_start)&amp;#10;sound_birds.track.start(resume=1)" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
-        <Param val="if frameN==0:&amp;#10;    send_trigger(trigger_buf_start)&amp;#10;    sound_wait.play()&amp;#10;&amp;#10;if buffer_fixation.status==FINISHED and not sound_stopped:&amp;#10;    send_trigger(trigger_buf_stop)&amp;#10;    sound_wait.pause()&amp;#10;    sound_stopped = True" valType="extendedCode" updates="constant" name="Each Frame"/>
-        <Param val="if ((frameN === 0)) {&amp;#10;    send_trigger(trigger_buf_start);&amp;#10;    sound_wait.play();&amp;#10;}&amp;#10;if (((buffer_fixation.status === PsychoJS.Status.FINISHED) &amp;&amp; (! sound_stopped))) {&amp;#10;    send_trigger(trigger_buf_stop);&amp;#10;    sound_wait.pause();&amp;#10;    sound_stopped = true;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="if buffer_fixation.status==FINISHED:&amp;#10;    send_trigger(trigger_buf_stop)&amp;#10;    sound_birds.track.stop()&amp;#10;" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="if ((buffer_fixation.status === PsychoJS.Status.FINISHED)) {&amp;#10;    send_trigger(trigger_buf_stop);&amp;#10;    sound_birds.track.stop();&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
@@ -927,7 +911,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="mapping = {&quot;r&quot;: &quot;u&quot;, &quot;y&quot;: &quot;d&quot;, &quot;b&quot;: &quot;r&quot;, &quot;g&quot;: &quot;l&quot;};&amp;#10;if ((question_key_resp.keys &amp;&amp; question_key_resp.keys.length)) {&amp;#10;    key_pos = mapping[question_key_resp.keys.slice((- 1))[0]];&amp;#10;    if ((key_pos === df_trial.correct_pos)) {&amp;#10;        sound_correct.stop();&amp;#10;        sound_correct.play();&amp;#10;        console.log(&quot;Correct answer&quot;);&amp;#10;    } else {&amp;#10;        sound_wrong.stop();&amp;#10;        sound_wrong.play();&amp;#10;        wrong_answers += 1;&amp;#10;        console.log(&quot;Wrong answer&quot;);&amp;#10;    }&amp;#10;} else {&amp;#10;    sound_wrong.stop();&amp;#10;    sound_wrong.play();&amp;#10;    misses += 1;&amp;#10;    console.log(&quot;Miss&quot;);&amp;#10;    reward_count -= reward_amount;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="# play for wrong/correct button presses&amp;#10;# mapping from keys to positions&amp;#10;&amp;#10;mapping = {'r': 'u', 'y': 'd', 'b': 'r', 'g': 'l'}&amp;#10;if question_key_resp.keys and len(question_key_resp.keys):&amp;#10;    key_pos = mapping[question_key_resp.keys[-1]]&amp;#10;    if key_pos==df_trial.correct_pos:&amp;#10;        sound_correct.stop()&amp;#10;        sound_correct.play()&amp;#10;        send_trigger(trigger_sequence_sound1)&amp;#10;        print('Correct answer')&amp;#10;    else:&amp;#10;        sound_wrong.stop()&amp;#10;        sound_wrong.play()&amp;#10;        wrong_answers += 1&amp;#10;        send_trigger(trigger_sequence_sound0)&amp;#10;        print('Wrong answer')&amp;#10;else:&amp;#10;    # play error in case of missed button press&amp;#10;    sound_wrong.stop()&amp;#10;    sound_wrong.play()&amp;#10;    misses += 1&amp;#10;    send_trigger(trigger_sequence_sound0)&amp;#10;    print('Miss')&amp;#10;    reward_count -= reward_amount &amp;#10;&amp;#10;# set the break conditional to true to display a break&amp;#10;break_conditional_nReps = int(i_block in breaks_after_block)&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="# play for wrong/correct button presses&amp;#10;# mapping from keys to positions&amp;#10;&amp;#10;mapping = {'r': 'u', 'y': 'd', 'b': 'r', 'g': 'l'}&amp;#10;if question_key_resp.keys and len(question_key_resp.keys):&amp;#10;    key_pos = mapping[question_key_resp.keys[-1]]&amp;#10;    if key_pos==df_trial.correct_pos:&amp;#10;        sound_correct.stop()&amp;#10;        sound_correct.play()&amp;#10;        send_trigger(trigger_sequence_sound1)&amp;#10;        reward_count += reward_in_ct&amp;#10;        print('Correct answer')&amp;#10;    else:&amp;#10;        sound_wrong.stop()&amp;#10;        sound_wrong.play()&amp;#10;        wrong_answers += 1&amp;#10;        send_trigger(trigger_sequence_sound0)&amp;#10;        print('Wrong answer')&amp;#10;else:&amp;#10;    # play error in case of missed button press&amp;#10;    sound_wrong.stop()&amp;#10;    sound_wrong.play()&amp;#10;    misses += 1&amp;#10;    send_trigger(trigger_sequence_sound0)&amp;#10;    print('Miss')&amp;#10;    #reward_count -= reward_in_ct &amp;#10;&amp;#10;# set the break conditional to true to display a break&amp;#10;break_conditional_nReps = int(i_block in breaks_after_block)&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -1425,6 +1409,23 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
+      <CodeComponent name="code_final" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="psychoJS.experiment.addData(&quot;total reward gained&quot;, reward_count);&amp;#10;console.log(`Participant gained an extra ${reward_count} ct`);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="thisExp.addData('total reward gained', reward_count)&amp;#10;&amp;#10;print(f'Participant gained an extra {reward_count} ct')" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="code_final" valType="code" updates="None" name="name"/>
+      </CodeComponent>
     </Routine>
     <Routine name="instruct_pre1">
       <RoutineSettingsComponent name="instruct_pre1" plugin="None">
@@ -1482,7 +1483,7 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="&amp;#10;Willkommen beim Hauptteil des Experiments.&amp;#10;&amp;#10;Im Folgenden werden sich die beiden Aufgaben aus der Übung immer abwechseln, d.h. erst wird ein paar Minuten lang Aufgabe 1 erscheinen, dann ein paar Minuten Aufgabe 2. Diese Abfolge wird 8x wiederholt. Alle paar Blöcke wird es eine kurze Verschnaufpause geben.&amp;#10;&amp;#10;Drücken Sie eine Taste um fortzufahren." valType="str" updates="constant" name="text"/>
+        <Param val="&amp;#10;Willkommen beim Hauptteil des Experiments.&amp;#10;&amp;#10;Im Folgenden werden sich die beiden Aufgaben aus der Übung immer abwechseln, d.h. erst wird ein paar Minuten lang Aufgabe 1 erscheinen, dann ein paar Minuten Aufgabe 2. Diese Abfolge wird 8x wiederholt. Alle paar Blöcke wird es eine kurze Verschnaufpause geben.&amp;#10;&amp;#10;Seien Sie aufmerksam! Die beiden Aufgaben werden ohne Ankündigung wechseln.&amp;#10;&amp;#10;Drücken Sie eine Taste um fortzufahren." valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
@@ -1491,8 +1492,8 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="if ((language === &quot;english&quot;)) {&amp;#10;    text_2.text = &quot;Welcome to the main part of the experiment.\n\nIn the following, the two tasks from the exercise will always alternate, i.e. task 1 will appear first for a few minutes, then task 2 for a few minutes. This sequence will be repeated 8 times. There will be a short breather every few blocks.\n\nPress any button to continue.&quot;;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="if language=='english':&amp;#10;    text_2.text = &quot;&quot;&quot;Welcome to the main part of the experiment.&amp;#10;&amp;#10;In the following, the two tasks from the exercise will always alternate, i.e. task 1 will appear first for a few minutes, then task 2 for a few minutes. This sequence will be repeated 8 times. There will be a short breather every few blocks.&amp;#10;&amp;#10;Press any button to continue.&quot;&quot;&quot;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="if ((language === &quot;english&quot;)) {&amp;#10;    text_2.text = &quot;Welcome to the main part of the experiment.\n\nIn the following, the two tasks from the exercise will always alternate, i.e. task 1 will appear first for a few minutes, then task 2 for a few minutes. This sequence will be repeated 8 times. There will be a short breather every few blocks. \n\nPay attention! The two tasks will switch without a warning, so be ready.\n\nPress any button to continue.&quot;;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if language=='english':&amp;#10;    text_2.text = &quot;&quot;&quot;Welcome to the main part of the experiment.&amp;#10;&amp;#10;In the following, the two tasks from the exercise will always alternate, i.e. task 1 will appear first for a few minutes, then task 2 for a few minutes. This sequence will be repeated 8 times. There will be a short breather every few blocks. &amp;#10;&amp;#10;Pay attention! The two tasks will switch without a warning, so be ready.&amp;#10;&amp;#10;Press any button to continue.&quot;&quot;&quot;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -1569,8 +1570,8 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="if ((language === &quot;english&quot;)) {&amp;#10;    text_4.text = &quot;To ensure good data quality, it is important that you remain as still as possible during the experiment. In particular, try to minimize head movements and, if possible, wait until the breaks before making any movements.\n\nReminder: You will receive a reward of X cents for every correct answer. If you give an incorrect answer, X cents will be deducted. Please try to answer as quickly as possible.\n\nPress any button to start the experiment and task 1.&quot;;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="if language=='english':&amp;#10;    text_4.text=&quot;&quot;&quot;To ensure good data quality, it is important that you remain as still as possible during the experiment. In particular, try to minimize head movements and, if possible, wait until the breaks before making any movements.&amp;#10;&amp;#10;Reminder: You will receive a reward of X cents for every correct answer. If you give an incorrect answer, X cents will be deducted. Please try to answer as quickly as possible.&amp;#10;&amp;#10;Press any button to start the experiment and task 1.&quot;&quot;&quot;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="if ((language === &quot;english&quot;)) {&amp;#10;    text_4.text = `To ensure good data quality, it is important that you remain as still as possible during the experiment. In particular, try to minimize head movements and, if possible, wait until the breaks before making any movements.&amp;#10;&amp;#10;Reminder: You will receive a reward of ${reward_in_ct} cents for every correct answer. If you give an incorrect answer, ${reward_in_ct} cents will be deducted. Please try to answer as quickly as possible.&amp;#10;&amp;#10;Press any button to start the experiment and task 1.`&amp;#10;;&amp;#10;} else {&amp;#10;    if ((language === &quot;german&quot;)) {&amp;#10;        text_4.text = `Für eine gute Datenqualität ist es wichtig, dass sie während des Experimentes so ruhig wie möglich sitzen bleiben. Versuchen Sie insbesondere Kopfbewegungen zu minimieren und wenn möglich mit Bewegungen bis zu den Pausen zu warten.&amp;#10;&amp;#10;Zur Erinnerung: Für jede richtige Antwort erhalten Sie eine Belohnung von ${reward_in_ct} Cent. Wenn Sie eine falsche Antwort geben werden Ihnen ${reward_in_ct} Cent abgezogen. Bitte versuchen Sie so schnell wie möglich zu antworten.&amp;#10;&amp;#10;Drücken Sie eine Taste um mit dem Experiment und Aufgabe 1 zu starten.`&amp;#10;;&amp;#10;    }&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if language=='english':&amp;#10;    text_4.text=f&quot;&quot;&quot;To ensure good data quality, it is important that you remain as still as possible during the experiment. In particular, try to minimize head movements and, if possible, wait until the breaks before making any movements.&amp;#10;&amp;#10;Reminder: You will receive a reward of {reward_in_ct} cents for every correct answer. If you give an incorrect answer, {reward_in_ct} cents will be deducted. Please try to answer as quickly as possible.&amp;#10;&amp;#10;Press any button to start the experiment and task 1.&quot;&quot;&quot;&amp;#10;&amp;#10;elif language=='german':&amp;#10;    text_4.text = f&quot;&quot;&quot;Für eine gute Datenqualität ist es wichtig, dass sie während des Experimentes so ruhig wie möglich sitzen bleiben. Versuchen Sie insbesondere Kopfbewegungen zu minimieren und wenn möglich mit Bewegungen bis zu den Pausen zu warten.&amp;#10;&amp;#10;Zur Erinnerung: Für jede richtige Antwort erhalten Sie eine Belohnung von {reward_in_ct} Cent. Wenn Sie eine falsche Antwort geben werden Ihnen {reward_in_ct} Cent abgezogen. Bitte versuchen Sie so schnell wie möglich zu antworten.&amp;#10;&amp;#10;Drücken Sie eine Taste um mit dem Experiment und Aufgabe 1 zu starten.&quot;&quot;&quot;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -1706,15 +1707,15 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="if ((frameN === 0)) {&amp;#10;    send_trigger(trigger_break_start);&amp;#10;}&amp;#10;if ((language === &quot;english&quot;)) {&amp;#10;    test_8.text = &quot;&lt;short break&gt;\n\n    Please take a short breather.\n\n    Press any button if you want to continue with the next block.&quot;;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="if frameN==0:&amp;#10;    send_trigger(trigger_break_start)&amp;#10;    &amp;#10;if language=='english':&amp;#10;    test_8.text = &quot;&quot;&quot;&lt;short break&gt;&amp;#10;&amp;#10;    Please take a short breather.&amp;#10;&amp;#10;    Press any button if you want to continue with the next block.&quot;&quot;&quot;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="if ((frameN === 0)) {&amp;#10;    send_trigger(trigger_break_start);&amp;#10;}&amp;#10;console.log(&quot;break started&quot;);&amp;#10;if ((language === &quot;english&quot;)) {&amp;#10;    test_8.text = `&lt;short break&gt;&amp;#10;&amp;#10;Please take a short breather.&amp;#10;&amp;#10;So far you have gained ${reward_count} ct bonus.&amp;#10;&amp;#10;Press any button if you want to continue with the next block.`&amp;#10;;&amp;#10;}&amp;#10;if ((language === &quot;german&quot;)) {&amp;#10;    text_8.text = `&amp;#10;&lt;Kurze Pause&gt;&amp;#10;&amp;#10;Bitte nehmen Sie eine kurze Verschnaufpause.&amp;#10;&amp;#10;Bisher haben Sie ${reward_count} ct Bonus erspielt.&amp;#10;&amp;#10;Drücken Sie eine beliebige Taste, wenn Sie mit dem nächsten Block fortfahren wollen.`&amp;#10;;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if frameN==0:&amp;#10;    send_trigger(trigger_break_start)&amp;#10;print('break started')&amp;#10;if language=='english':&amp;#10;    test_8.text = f&quot;&quot;&quot;&lt;short break&gt;&amp;#10;   &amp;#10;    Please take a short breather.&amp;#10;    &amp;#10;    So far you have gained {reward_count} ct bonus.&amp;#10;&amp;#10;    Press any button if you want to continue with the next block.&quot;&quot;&quot;&amp;#10;    &amp;#10;if language=='german':&amp;#10;    text_8.text = f&quot;&quot;&quot;&amp;#10;&lt;Kurze Pause&gt;&amp;#10;&amp;#10;Bitte nehmen Sie eine kurze Verschnaufpause.&amp;#10;&amp;#10;Bisher haben Sie {reward_count} ct Bonus erspielt.&amp;#10;&amp;#10;Drücken Sie eine beliebige Taste, wenn Sie mit dem nächsten Block fortfahren wollen.&quot;&quot;&quot;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="if ((frameN === 0)) {&amp;#10;    send_trigger(trigger_break_stop);&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="if frameN==0:&amp;#10;    send_trigger(trigger_break_stop)" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="send_trigger(trigger_break_stop);&amp;#10;console.log(&quot;break ended&quot;);&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="send_trigger(trigger_break_stop)&amp;#10;print('break ended')&amp;#10;" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="code_break" valType="code" updates="None" name="name"/>
       </CodeComponent>
@@ -1765,8 +1766,8 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="i_localizer = 0;&amp;#10;i_sequence = 0;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="i_localizer=0&amp;#10;i_sequence=0" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="i_localizer = 0;&amp;#10;i_sequence = 0;&amp;#10;i_block = blocks.thisN;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="i_localizer=0&amp;#10;i_sequence=0&amp;#10;i_block=blocks.thisN" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="if frameN==0:&amp;#10;    send_trigger(trigger_fixation_pre1)&amp;#10;" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="if ((frameN === 0)) {&amp;#10;    send_trigger(trigger_fixation_pre1);&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
