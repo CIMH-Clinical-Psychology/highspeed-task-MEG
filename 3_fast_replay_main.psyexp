@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" ?>
-<PsychoPy2experiment encoding="utf-8" version="2023.2.0">
+<PsychoPy2experiment encoding="utf-8" version="2023.2.2">
   <Settings>
     <Param val="0" valType="str" updates="None" name="Audio latency priority"/>
     <Param val="pyo" valType="str" updates="None" name="Audio lib"/>
@@ -660,7 +660,7 @@
         <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
       </RoutineSettingsComponent>
       <KeyboardComponent name="question_key_resp" plugin="None">
-        <Param val="'g', 'b'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="'g', 'r', 'b'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
@@ -911,7 +911,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="mapping = {&quot;r&quot;: &quot;u&quot;, &quot;y&quot;: &quot;d&quot;, &quot;b&quot;: &quot;r&quot;, &quot;g&quot;: &quot;l&quot;};&amp;#10;if ((question_key_resp.keys &amp;&amp; question_key_resp.keys.length)) {&amp;#10;    key_pos = mapping[question_key_resp.keys.slice((- 1))[0]];&amp;#10;    if ((key_pos === df_trial.correct_pos)) {&amp;#10;        sound_correct.stop();&amp;#10;        sound_correct.play();&amp;#10;        console.log(&quot;Correct answer&quot;);&amp;#10;    } else {&amp;#10;        sound_wrong.stop();&amp;#10;        sound_wrong.play();&amp;#10;        wrong_answers += 1;&amp;#10;        console.log(&quot;Wrong answer&quot;);&amp;#10;    }&amp;#10;} else {&amp;#10;    sound_wrong.stop();&amp;#10;    sound_wrong.play();&amp;#10;    misses += 1;&amp;#10;    console.log(&quot;Miss&quot;);&amp;#10;    reward_count -= reward_amount;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="# play for wrong/correct button presses&amp;#10;# mapping from keys to positions&amp;#10;&amp;#10;mapping = {'r': 'u', 'y': 'd', 'b': 'r', 'g': 'l'}&amp;#10;if question_key_resp.keys and len(question_key_resp.keys):&amp;#10;    key_pos = mapping[question_key_resp.keys[-1]]&amp;#10;    if key_pos==df_trial.correct_pos:&amp;#10;        sound_correct.stop()&amp;#10;        sound_correct.play()&amp;#10;        send_trigger(trigger_sequence_sound1)&amp;#10;        reward_count += reward_in_ct&amp;#10;        print('Correct answer')&amp;#10;    else:&amp;#10;        sound_wrong.stop()&amp;#10;        sound_wrong.play()&amp;#10;        wrong_answers += 1&amp;#10;        send_trigger(trigger_sequence_sound0)&amp;#10;        print('Wrong answer')&amp;#10;else:&amp;#10;    # play error in case of missed button press&amp;#10;    sound_wrong.stop()&amp;#10;    sound_wrong.play()&amp;#10;    misses += 1&amp;#10;    send_trigger(trigger_sequence_sound0)&amp;#10;    print('Miss')&amp;#10;    #reward_count -= reward_in_ct &amp;#10;&amp;#10;# set the break conditional to true to display a break&amp;#10;break_conditional_nReps = int(i_block in breaks_after_block)&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="# play for wrong/correct button presses&amp;#10;# mapping from keys to positions&amp;#10;&amp;#10;mapping = {'r': 'r', 'y': 'd', 'b': 'r', 'g': 'l'}&amp;#10;if question_key_resp.keys and len(question_key_resp.keys):&amp;#10;    key_pos = mapping[question_key_resp.keys[-1]]&amp;#10;    if key_pos==df_trial.correct_pos:&amp;#10;        sound_correct.stop()&amp;#10;        sound_correct.play()&amp;#10;        send_trigger(trigger_sequence_sound1)&amp;#10;        reward_count += reward_in_ct&amp;#10;        print('Correct answer')&amp;#10;    else:&amp;#10;        sound_wrong.stop()&amp;#10;        sound_wrong.play()&amp;#10;        wrong_answers += 1&amp;#10;        send_trigger(trigger_sequence_sound0)&amp;#10;        print('Wrong answer')&amp;#10;else:&amp;#10;    # play error in case of missed button press&amp;#10;    sound_wrong.stop()&amp;#10;    sound_wrong.play()&amp;#10;    misses += 1&amp;#10;    send_trigger(trigger_sequence_sound0)&amp;#10;    print('Miss')&amp;#10;    #reward_count -= reward_in_ct &amp;#10;&amp;#10;# set the break conditional to true to display a break&amp;#10;break_conditional_nReps = int(i_block in breaks_after_block)&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -1755,7 +1755,7 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="1.5" valType="code" updates="constant" name="stopVal"/>
+        <Param val="3.5" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="" valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
@@ -1814,7 +1814,7 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="1.5" valType="code" updates="constant" name="stopVal"/>
+        <Param val="3.5" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="" valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
