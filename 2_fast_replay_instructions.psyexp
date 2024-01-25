@@ -2,7 +2,7 @@
 <PsychoPy2experiment encoding="utf-8" version="2023.2.2">
   <Settings>
     <Param val="0" valType="str" updates="None" name="Audio latency priority"/>
-    <Param val="pygame" valType="str" updates="None" name="Audio lib"/>
+    <Param val="pyo" valType="str" updates="None" name="Audio lib"/>
     <Param val="" valType="str" updates="None" name="Completed URL"/>
     <Param val="comma" valType="str" updates="None" name="Data file delimiter"/>
     <Param val="u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code" updates="None" name="Data filename"/>
@@ -519,8 +519,8 @@
       <CodeComponent name="settings" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="t_img_sequence = 0.1&amp;#10;t_img_localizer = 0.5&amp;#10;t_isi_localizer = 2.0&amp;#10;&amp;#10;t_buffer = 8&amp;#10;&amp;#10;reward_amount = 0.03  # +-3 ct per trial&amp;#10;&amp;#10;n_localizer_trials = 5&amp;#10;n_sequence_trials = 3&amp;#10;&amp;#10;dot_color = (-0.5, -0.5, -0.5)&amp;#10;&amp;#10;image_size = 0.25&amp;#10;&amp;#10;letter_height=0.06&amp;#10;&amp;#10;reward = 3" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="t_img_sequence = 0.1;&amp;#10;t_img_localizer = 0.5;&amp;#10;t_isi_localizer = 2.0;&amp;#10;t_buffer = 8;&amp;#10;reward_amount = 0.03;&amp;#10;n_localizer_trials = 5;&amp;#10;n_sequence_trials = 3;&amp;#10;dot_color = [(- 0.5), (- 0.5), (- 0.5)];&amp;#10;image_size = 0.25;&amp;#10;letter_height = 0.06;&amp;#10;reward = 3;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="t_img_sequence = 0.1&amp;#10;t_img_localizer = 0.5&amp;#10;t_isi_localizer = 2.0&amp;#10;&amp;#10;t_buffer = 9&amp;#10;&amp;#10;reward_amount = 0.05  # +-5 ct per trial&amp;#10;&amp;#10;n_localizer_trials = 5&amp;#10;n_sequence_trials = 3&amp;#10;&amp;#10;dot_color = (-0.5, -0.5, -0.5)&amp;#10;&amp;#10;image_size = 0.33&amp;#10;&amp;#10;letter_height=0.06&amp;#10;&amp;#10;reward = 5" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="t_img_sequence = 0.1;&amp;#10;t_img_localizer = 0.5;&amp;#10;t_isi_localizer = 2.0;&amp;#10;t_buffer = 9;&amp;#10;reward_amount = 0.05;&amp;#10;n_localizer_trials = 5;&amp;#10;n_sequence_trials = 3;&amp;#10;dot_color = [(- 0.5), (- 0.5), (- 0.5)];&amp;#10;image_size = 0.33;&amp;#10;letter_height = 0.06;&amp;#10;reward = 5;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
@@ -670,7 +670,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height*1.33" valType="num" updates="constant" name="letterHeight"/>
         <Param val="question_text" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -729,7 +729,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height*1.33" valType="num" updates="constant" name="letterHeight"/>
         <Param val="cue_text" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
