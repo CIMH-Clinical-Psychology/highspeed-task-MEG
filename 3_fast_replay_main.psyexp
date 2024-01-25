@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" ?>
-<PsychoPy2experiment encoding="utf-8" version="2023.2.2">
+<PsychoPy2experiment encoding="utf-8" version="2023.2.0">
   <Settings>
     <Param val="0" valType="str" updates="None" name="Audio latency priority"/>
     <Param val="pyo" valType="str" updates="None" name="Audio lib"/>
@@ -709,7 +709,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="&amp;#10;choices = [df_trial.target_idx, df_trial.lure_idx]&amp;#10;if df_trial.correct_pos=='r':&amp;#10;    choices = choices[::-1]&amp;#10;    &amp;#10;question_text.text = f'Position\n\n\n\n\n{df_trial.cue}\n\n\n\n\n'&amp;#10;question_text.text += '             ?             '.join([str(c+1) for c in choices])" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="&amp;#10;choices = [df_trial.target_idx, df_trial.lure_idx]&amp;#10;if df_trial.correct_pos=='r':&amp;#10;    choices = choices[::-1]&amp;#10;    &amp;#10;&amp;#10;question_text.text = f'Position\n\n\n\n\n{cue_text.text}\n\n\n\n\n'&amp;#10;question_text.text += '             ?             '.join([str(c+1) for c in choices])" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -746,7 +746,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height*1.5" valType="num" updates="constant" name="letterHeight"/>
         <Param val="cue_text" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -1414,8 +1414,8 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="psychoJS.experiment.addData(&quot;total reward gained&quot;, reward_count);&amp;#10;test_5.text = test_5.text.replace(&quot;BONUS&quot;, `${reward_count} ct`);&amp;#10;console.log(`Participant gained an extra ${reward_count} ct of maximum ${reward_max} ct`);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="thisExp.addData('total reward gained', reward_count)&amp;#10;test_5.text = test_5.text.replace('BONUS', f'{reward_count} ct')&amp;#10;print(f'Participant gained an extra {reward_count} ct of maximum {reward_max} ct')" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="psychoJS.experiment.addData(&quot;total reward gained&quot;, reward_count);&amp;#10;text_5.text = text_5.text.replace(&quot;BONUS&quot;, `${reward_count} ct`);&amp;#10;console.log(`Participant gained an extra ${reward_count} ct of maximum ${reward_max} ct`);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="thisExp.addData('total reward gained', reward_count)&amp;#10;text_5.text = text_5.text.replace('BONUS', f'{reward_count} ct')&amp;#10;print(f'Participant gained an extra {reward_count} ct of maximum {reward_max} ct')" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -1707,8 +1707,8 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="if ((frameN === 0)) {&amp;#10;    send_trigger(trigger_break_start);&amp;#10;}&amp;#10;console.log(&quot;break started&quot;);&amp;#10;if ((language === &quot;english&quot;)) {&amp;#10;    test_8.text = `&lt;short break&gt;&amp;#10;&amp;#10;Please take a short breather.&amp;#10;&amp;#10;So far you have gained ${reward_count} ct bonus.&amp;#10;&amp;#10;Press any button if you want to continue with the next block.`&amp;#10;;&amp;#10;}&amp;#10;if ((language === &quot;german&quot;)) {&amp;#10;    text_8.text = `&amp;#10;&lt;Kurze Pause&gt;&amp;#10;&amp;#10;Bitte nehmen Sie eine kurze Verschnaufpause.&amp;#10;&amp;#10;Bisher haben Sie ${reward_count} ct Bonus erspielt.&amp;#10;&amp;#10;Drücken Sie eine beliebige Taste, wenn Sie mit dem nächsten Block fortfahren wollen.`&amp;#10;;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="if frameN==0:&amp;#10;    send_trigger(trigger_break_start)&amp;#10;print('break started')&amp;#10;if language=='english':&amp;#10;    test_8.text = f&quot;&quot;&quot;&lt;short break&gt;&amp;#10;   &amp;#10;    Please take a short breather.&amp;#10;    &amp;#10;    So far you have gained {reward_count} ct bonus.&amp;#10;&amp;#10;    Press any button if you want to continue with the next block.&quot;&quot;&quot;&amp;#10;    &amp;#10;if language=='german':&amp;#10;    text_8.text = f&quot;&quot;&quot;&amp;#10;&lt;Kurze Pause&gt;&amp;#10;&amp;#10;Bitte nehmen Sie eine kurze Verschnaufpause.&amp;#10;&amp;#10;Bisher haben Sie {reward_count} ct Bonus erspielt.&amp;#10;&amp;#10;Drücken Sie eine beliebige Taste, wenn Sie mit dem nächsten Block fortfahren wollen.&quot;&quot;&quot;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="if ((frameN === 0)) {&amp;#10;    send_trigger(trigger_break_start);&amp;#10;}&amp;#10;console.log(&quot;break started&quot;);&amp;#10;if ((language === &quot;english&quot;)) {&amp;#10;    text_8.text = `&lt;short break&gt;&amp;#10;&amp;#10;Please take a short breather.&amp;#10;&amp;#10;So far you have gained ${reward_count} ct bonus.&amp;#10;&amp;#10;Press any button if you want to continue with the next block.`&amp;#10;;&amp;#10;}&amp;#10;if ((language === &quot;german&quot;)) {&amp;#10;    text_8.text = `&amp;#10;&lt;Kurze Pause&gt;&amp;#10;&amp;#10;Bitte nehmen Sie eine kurze Verschnaufpause.&amp;#10;&amp;#10;Bisher haben Sie ${reward_count} ct Bonus erspielt.&amp;#10;&amp;#10;Drücken Sie eine beliebige Taste, wenn Sie mit dem nächsten Block fortfahren wollen.`&amp;#10;;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if frameN==0:&amp;#10;    send_trigger(trigger_break_start)&amp;#10;print('break started')&amp;#10;if language=='english':&amp;#10;    text_8.text = f&quot;&quot;&quot;&lt;short break&gt;&amp;#10;   &amp;#10;    Please take a short breather.&amp;#10;    &amp;#10;    So far you have gained {reward_count} ct bonus.&amp;#10;&amp;#10;    Press any button if you want to continue with the next block.&quot;&quot;&quot;&amp;#10;    &amp;#10;if language=='german':&amp;#10;    text_8.text = f&quot;&quot;&quot;&amp;#10;&lt;Kurze Pause&gt;&amp;#10;&amp;#10;Bitte nehmen Sie eine kurze Verschnaufpause.&amp;#10;&amp;#10;Bisher haben Sie {reward_count} ct Bonus erspielt.&amp;#10;&amp;#10;Drücken Sie eine beliebige Taste, wenn Sie mit dem nächsten Block fortfahren wollen.&quot;&quot;&quot;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
