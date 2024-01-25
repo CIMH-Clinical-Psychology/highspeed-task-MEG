@@ -284,5 +284,5 @@ n_reward = int(np.round(max_reward/(n_sequences+n_distractors)))
 print(f'\n\n{n_sequences} sequence trials')
 print(f'{n_distractors} distractor trials')
 print(f'reward_per_trial = {n_reward} ct')
-with open('reward_in_cent.txt', 'w') as f:
+with open('reward_in_ct.txt', 'w') as f:
     f.write(str(n_reward))

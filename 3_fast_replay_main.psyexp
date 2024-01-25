@@ -196,7 +196,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="df_block = df_localizer[df_localizer['block']==i_block].reset_index()&amp;#10;df_trial = df_block.iloc[i_localizer]&amp;#10;&amp;#10;localizer_img.image = df_trial.img&amp;#10;t_isi_localizer = df_trial.isi&amp;#10;is_distractor = df_trial.distractor&amp;#10;&amp;#10;# prevent inactive sound from blocking trial finish&amp;#10;sound_correct.status = FINISHED&amp;#10;sound_wrong.status = FINISHED&amp;#10;&amp;#10;played = False&amp;#10;&amp;#10;if is_distractor:&amp;#10;    localizer_img.ori  = 180&amp;#10;else:&amp;#10;    localizer_img.ori  = 0&amp;#10;&amp;#10;msg = f'localizer {i_localizer}/{len(df_block)}'&amp;#10;msg += f' block {i_block}/{max(df_localizer[&quot;block&quot;])} {&quot;[FLIPPED]&quot; if is_distractor else &quot;&quot;} isi={t_isi_localizer:.2f}s'&amp;#10;print(msg)" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
-        <Param val="if frameN == 0:&amp;#10;    img_idx = trigger_img[get_image_name(df_trial.img)]&amp;#10;    send_trigger(trigger_base_val_localizer + img_idx)&amp;#10;&amp;#10;# play for wrong/correct button presses&amp;#10;if len(key_resp_localizer.keys) and not played:&amp;#10;    played = True&amp;#10;    if is_distractor:&amp;#10;        sound_correct.play()&amp;#10;        reward_count += reward_in_ct &amp;#10;        print('Correct press')&amp;#10;        send_trigger(trigger_localizer_sound1)&amp;#10;    else:&amp;#10;        sound_wrong.play()&amp;#10;        reward_count -= reward_in_ct &amp;#10;        false_alarms += 1&amp;#10;        print('False alarm')&amp;#10;        send_trigger(trigger_localizer_sound0)&amp;#10;&amp;#10;# play error in case of missed button press&amp;#10;if is_distractor and key_resp_localizer.status==FINISHED and not played:&amp;#10;    played = True&amp;#10;    sound_wrong.play()&amp;#10;    misses += 1&amp;#10;    print('Miss')&amp;#10;    send_trigger(trigger_localizer_sound0)&amp;#10;    reward_count -= reward_in_ct &amp;#10;&amp;#10;sound_correct.status = FINISHED&amp;#10;sound_wrong.status = FINISHED" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="if frameN == 0:&amp;#10;    img_idx = trigger_img[get_image_name(df_trial.img)]&amp;#10;    if is_distractor:&amp;#10;        send_trigger(trigger_base_val_localizer_distractor + img_idx)&amp;#10;    else:&amp;#10;        send_trigger(trigger_base_val_localizer + img_idx)&amp;#10;&amp;#10;# play for wrong/correct button presses&amp;#10;if len(key_resp_localizer.keys) and not played:&amp;#10;    played = True&amp;#10;    if is_distractor:&amp;#10;        sound_correct.play()&amp;#10;        reward_count += reward_in_ct &amp;#10;        reward_max += reward_in_ct &amp;#10;        print('Correct press')&amp;#10;        send_trigger(trigger_localizer_sound1)&amp;#10;    else:&amp;#10;        sound_wrong.play()&amp;#10;        reward_count -= reward_in_ct &amp;#10;        false_alarms += 1&amp;#10;        print('False alarm')&amp;#10;        send_trigger(trigger_localizer_sound0)&amp;#10;&amp;#10;# play error in case of missed button press&amp;#10;if is_distractor and key_resp_localizer.status==FINISHED and not played:&amp;#10;    played = True&amp;#10;    sound_wrong.play()&amp;#10;    misses += 1&amp;#10;    print('Miss')&amp;#10;    send_trigger(trigger_localizer_sound0)&amp;#10;    reward_count -= reward_in_ct &amp;#10;&amp;#10;&amp;#10;sound_correct.status = FINISHED&amp;#10;sound_wrong.status = FINISHED" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
@@ -519,8 +519,8 @@
       <CodeComponent name="settings" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="t_img_sequence = 0.1&amp;#10;t_img_localizer = 0.5&amp;#10;t_isi_localizer = 2.0&amp;#10;t_buffer = 8&amp;#10;&amp;#10;image_size = 0.25&amp;#10;&amp;#10;letter_height=0.06&amp;#10;&amp;#10; # show break after these blocks&amp;#10;breaks_after_block = [1, 3, 5] &amp;#10;&amp;#10;n_localizer_trials = 5&amp;#10;n_sequence_trials = 3&amp;#10;&amp;#10;dot_color = (-0.5, -0.5, -0.5)&amp;#10;&amp;#10;trigger_img = {}&amp;#10;trigger_img['Gesicht'] = 1&amp;#10;trigger_img['Haus']   = 2&amp;#10;trigger_img['Katze']   = 3&amp;#10;trigger_img['Schuh']   = 4&amp;#10;trigger_img['Stuhl']   = 5&amp;#10;&amp;#10;trigger_break_start = 91&amp;#10;trigger_break_stop = 92&amp;#10;trigger_buf_start = 61&amp;#10;trigger_buf_stop = 62&amp;#10;trigger_sequence_sound0 = 70&amp;#10;trigger_sequence_sound1 = 71&amp;#10;trigger_localizer_sound0 = 30&amp;#10;trigger_localizer_sound1 = 31&amp;#10;trigger_fixation_pre1 = 81&amp;#10;trigger_fixation_pre2 = 82&amp;#10;&amp;#10;# these get added depending on the trial&amp;#10;# ie. Gesicht in localizer = 1, as cue = 11, as sequence=21&amp;#10;trigger_base_val_localizer = 0&amp;#10;trigger_base_val_cue = 10&amp;#10;trigger_base_val_sequence = 20&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="t_img_sequence = 0.1;&amp;#10;t_img_localizer = 0.5;&amp;#10;t_isi_localizer = 2.0;&amp;#10;t_buffer = 8;&amp;#10;image_size = 0.25;&amp;#10;letter_height = 0.06;&amp;#10;breaks_after_block = [1, 3, 5];&amp;#10;n_localizer_trials = 5;&amp;#10;n_sequence_trials = 3;&amp;#10;dot_color = [(- 0.5), (- 0.5), (- 0.5)];&amp;#10;trigger_img = {};&amp;#10;trigger_img[&quot;Gesicht&quot;] = 1;&amp;#10;trigger_img[&quot;Haus&quot;] = 2;&amp;#10;trigger_img[&quot;Katze&quot;] = 3;&amp;#10;trigger_img[&quot;Schuh&quot;] = 4;&amp;#10;trigger_img[&quot;Stuhl&quot;] = 5;&amp;#10;trigger_break_start = 91;&amp;#10;trigger_break_stop = 92;&amp;#10;trigger_buf_start = 61;&amp;#10;trigger_buf_stop = 62;&amp;#10;trigger_sequence_sound0 = 70;&amp;#10;trigger_sequence_sound1 = 71;&amp;#10;trigger_localizer_sound0 = 30;&amp;#10;trigger_localizer_sound1 = 31;&amp;#10;trigger_fixation_pre1 = 81;&amp;#10;trigger_fixation_pre2 = 82;&amp;#10;trigger_base_val_localizer = 0;&amp;#10;trigger_base_val_cue = 10;&amp;#10;trigger_base_val_sequence = 20;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="t_img_sequence = 0.1&amp;#10;t_img_localizer = 0.5&amp;#10;t_isi_localizer = 2.0&amp;#10;t_buffer = 9&amp;#10;&amp;#10;image_size = 0.25&amp;#10;&amp;#10;letter_height=0.06&amp;#10;&amp;#10; # show break after these blocks&amp;#10;breaks_after_block = [1, 3, 5]&amp;#10;&amp;#10;n_localizer_trials = 5&amp;#10;n_sequence_trials = 3&amp;#10;&amp;#10;dot_color = (-0.5, -0.5, -0.5)&amp;#10;&amp;#10;trigger_img = {}&amp;#10;trigger_img['Gesicht'] = 1&amp;#10;trigger_img['Haus']   = 2&amp;#10;trigger_img['Katze']   = 3&amp;#10;trigger_img['Schuh']   = 4&amp;#10;trigger_img['Stuhl']   = 5&amp;#10;&amp;#10;trigger_break_start = 91&amp;#10;trigger_break_stop = 92&amp;#10;trigger_buf_start = 61&amp;#10;trigger_buf_stop = 62&amp;#10;trigger_sequence_sound0 = 70&amp;#10;trigger_sequence_sound1 = 71&amp;#10;trigger_localizer_sound0 = 30&amp;#10;trigger_localizer_sound1 = 31&amp;#10;trigger_fixation_pre1 = 81&amp;#10;trigger_fixation_pre2 = 82&amp;#10;&amp;#10;# these get added depending on the trial&amp;#10;# ie. Gesicht in localizer = 1, as cue = 11, as sequence=21&amp;#10;trigger_base_val_localizer = 0&amp;#10;trigger_base_val_localizer_distractor = 100&amp;#10;trigger_base_val_cue = 10&amp;#10;trigger_base_val_sequence = 20&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="t_img_sequence = 0.1;&amp;#10;t_img_localizer = 0.5;&amp;#10;t_isi_localizer = 2.0;&amp;#10;t_buffer = 9;&amp;#10;image_size = 0.25;&amp;#10;letter_height = 0.06;&amp;#10;breaks_after_block = [1, 3, 5];&amp;#10;n_localizer_trials = 5;&amp;#10;n_sequence_trials = 3;&amp;#10;dot_color = [(- 0.5), (- 0.5), (- 0.5)];&amp;#10;trigger_img = {};&amp;#10;trigger_img[&quot;Gesicht&quot;] = 1;&amp;#10;trigger_img[&quot;Haus&quot;] = 2;&amp;#10;trigger_img[&quot;Katze&quot;] = 3;&amp;#10;trigger_img[&quot;Schuh&quot;] = 4;&amp;#10;trigger_img[&quot;Stuhl&quot;] = 5;&amp;#10;trigger_break_start = 91;&amp;#10;trigger_break_stop = 92;&amp;#10;trigger_buf_start = 61;&amp;#10;trigger_buf_stop = 62;&amp;#10;trigger_sequence_sound0 = 70;&amp;#10;trigger_sequence_sound1 = 71;&amp;#10;trigger_localizer_sound0 = 30;&amp;#10;trigger_localizer_sound1 = 31;&amp;#10;trigger_fixation_pre1 = 81;&amp;#10;trigger_fixation_pre2 = 82;&amp;#10;trigger_base_val_localizer = 0;&amp;#10;trigger_base_val_localizer_distractor = 100;&amp;#10;trigger_base_val_cue = 10;&amp;#10;trigger_base_val_sequence = 20;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
@@ -536,7 +536,7 @@
       <CodeComponent name="startup" plugin="None">
         <Param val="import meg_triggers&amp;#10;from meg_triggers import send_trigger&amp;#10;meg_triggers.set_default_duration(0.005)&amp;#10;" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="import * as meg_triggers from 'meg_triggers';&amp;#10;import {send_trigger} from 'meg_triggers';&amp;#10;meg_triggers.set_default_duration(0.005);&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="import pandas as pd&amp;#10;&amp;#10;subj_id = expInfo['participant']&amp;#10;&amp;#10;df_localizer = pd.read_csv(f'./sequences/localizer_{subj_id}.csv')&amp;#10;df_sequences = pd.read_csv(f'./sequences/sequences_{subj_id}.csv')&amp;#10;&amp;#10;# set variables we will access later&amp;#10;i_localizer = 0&amp;#10;i_sequence = 0&amp;#10;i_block = 0&amp;#10;&amp;#10;# store reward&amp;#10;reward_count = 0&amp;#10;false_alarms = 0&amp;#10;misses = 0&amp;#10;wrong_answers = 0&amp;#10;&amp;#10;# set the number of repetitions we have&amp;#10;n_blocks = max(df_localizer.block)+1&amp;#10;n_localizer_trials = max(df_localizer.trial)+1&amp;#10;n_sequence_trials = max(df_sequences.trial)+1&amp;#10;&amp;#10;with open('./reward_in_ct.txt', 'r') as f:&amp;#10;    reward_in_ct = int(f.read().strip())" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="import pandas as pd&amp;#10;&amp;#10;subj_id = expInfo['participant']&amp;#10;&amp;#10;df_localizer = pd.read_csv(f'./sequences/localizer_{subj_id}.csv')&amp;#10;df_sequences = pd.read_csv(f'./sequences/sequences_{subj_id}.csv')&amp;#10;&amp;#10;# set variables we will access later&amp;#10;i_localizer = 0&amp;#10;i_sequence = 0&amp;#10;i_block = 0&amp;#10;&amp;#10;# store reward&amp;#10;reward_max = 0&amp;#10;reward_count = 0&amp;#10;false_alarms = 0&amp;#10;misses = 0&amp;#10;wrong_answers = 0&amp;#10;&amp;#10;# set the number of repetitions we have&amp;#10;n_blocks = max(df_localizer.block)+1&amp;#10;n_localizer_trials = max(df_localizer.trial)+1&amp;#10;n_sequence_trials = max(df_sequences.trial)+1&amp;#10;&amp;#10;with open('./reward_in_ct.txt', 'r') as f:&amp;#10;    reward_in_ct = int(f.read().strip())" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="/* Syntax Error: Fix Python code */" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
@@ -687,7 +687,7 @@
         <Param val="None" valType="str" updates="constant" name="flip"/>
         <Param val="Open Sans" valType="str" updates="constant" name="font"/>
         <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
-        <Param val="letter_height" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="letter_height*1.5" valType="num" updates="constant" name="letterHeight"/>
         <Param val="question_text" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
@@ -857,7 +857,7 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="1.5" valType="code" updates="constant" name="stopVal"/>
+        <Param val="2" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="" valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
@@ -911,7 +911,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="mapping = {&quot;r&quot;: &quot;u&quot;, &quot;y&quot;: &quot;d&quot;, &quot;b&quot;: &quot;r&quot;, &quot;g&quot;: &quot;l&quot;};&amp;#10;if ((question_key_resp.keys &amp;&amp; question_key_resp.keys.length)) {&amp;#10;    key_pos = mapping[question_key_resp.keys.slice((- 1))[0]];&amp;#10;    if ((key_pos === df_trial.correct_pos)) {&amp;#10;        sound_correct.stop();&amp;#10;        sound_correct.play();&amp;#10;        console.log(&quot;Correct answer&quot;);&amp;#10;    } else {&amp;#10;        sound_wrong.stop();&amp;#10;        sound_wrong.play();&amp;#10;        wrong_answers += 1;&amp;#10;        console.log(&quot;Wrong answer&quot;);&amp;#10;    }&amp;#10;} else {&amp;#10;    sound_wrong.stop();&amp;#10;    sound_wrong.play();&amp;#10;    misses += 1;&amp;#10;    console.log(&quot;Miss&quot;);&amp;#10;    reward_count -= reward_amount;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="# play for wrong/correct button presses&amp;#10;# mapping from keys to positions&amp;#10;&amp;#10;mapping = {'r': 'r', 'y': 'd', 'b': 'r', 'g': 'l'}&amp;#10;if question_key_resp.keys and len(question_key_resp.keys):&amp;#10;    key_pos = mapping[question_key_resp.keys[-1]]&amp;#10;    if key_pos==df_trial.correct_pos:&amp;#10;        sound_correct.stop()&amp;#10;        sound_correct.play()&amp;#10;        send_trigger(trigger_sequence_sound1)&amp;#10;        reward_count += reward_in_ct&amp;#10;        print('Correct answer')&amp;#10;    else:&amp;#10;        sound_wrong.stop()&amp;#10;        sound_wrong.play()&amp;#10;        wrong_answers += 1&amp;#10;        send_trigger(trigger_sequence_sound0)&amp;#10;        print('Wrong answer')&amp;#10;else:&amp;#10;    # play error in case of missed button press&amp;#10;    sound_wrong.stop()&amp;#10;    sound_wrong.play()&amp;#10;    misses += 1&amp;#10;    send_trigger(trigger_sequence_sound0)&amp;#10;    print('Miss')&amp;#10;    #reward_count -= reward_in_ct &amp;#10;&amp;#10;# set the break conditional to true to display a break&amp;#10;break_conditional_nReps = int(i_block in breaks_after_block)&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="# play for wrong/correct button presses&amp;#10;# mapping from keys to positions&amp;#10;&amp;#10;mapping = {'r': 'r', 'y': 'd', 'b': 'r', 'g': 'l'}&amp;#10;if question_key_resp.keys and len(question_key_resp.keys):&amp;#10;    key_pos = mapping[question_key_resp.keys[-1]]&amp;#10;    if key_pos==df_trial.correct_pos:&amp;#10;        sound_correct.stop()&amp;#10;        sound_correct.play()&amp;#10;        send_trigger(trigger_sequence_sound1)&amp;#10;        reward_count += reward_in_ct&amp;#10;        reward_max += reward_in_ct &amp;#10;        print('Correct answer')&amp;#10;    else:&amp;#10;        sound_wrong.stop()&amp;#10;        sound_wrong.play()&amp;#10;        wrong_answers += 1&amp;#10;        send_trigger(trigger_sequence_sound0)&amp;#10;        print('Wrong answer')&amp;#10;else:&amp;#10;    # play error in case of missed button press&amp;#10;    sound_wrong.stop()&amp;#10;    sound_wrong.play()&amp;#10;    misses += 1&amp;#10;    send_trigger(trigger_sequence_sound0)&amp;#10;    print('Miss')&amp;#10;    #reward_count -= reward_in_ct &amp;#10;&amp;#10;# set the break conditional to true to display a break&amp;#10;break_conditional_nReps = int(i_block in breaks_after_block)&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -1405,7 +1405,7 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="5" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="Die Übung ist nun beendet. &amp;#10;&amp;#10;Bitte melden Sie sich beim Experimentleiter.&amp;#10;&amp;#10;--------------------&amp;#10;&amp;#10;The experiment has ended.&amp;#10;&amp;#10;Please let the experimentator know that you are finished." valType="str" updates="constant" name="text"/>
+        <Param val="Die Übung ist nun beendet. &amp;#10;Sie haben BONUS erspielt!&amp;#10;&amp;#10;Bitte melden Sie sich beim Experimentleiter.&amp;#10;&amp;#10;--------------------&amp;#10;&amp;#10;The experiment has ended.&amp;#10;You have gained BONUS!&amp;#10;&amp;#10;Please let the experimentator know that you are finished." valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
@@ -1414,8 +1414,8 @@
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="psychoJS.experiment.addData(&quot;total reward gained&quot;, reward_count);&amp;#10;console.log(`Participant gained an extra ${reward_count} ct`);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="thisExp.addData('total reward gained', reward_count)&amp;#10;&amp;#10;print(f'Participant gained an extra {reward_count} ct')" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="psychoJS.experiment.addData(&quot;total reward gained&quot;, reward_count);&amp;#10;test_5.text = test_5.text.replace(&quot;BONUS&quot;, `${reward_count} ct`);&amp;#10;console.log(`Participant gained an extra ${reward_count} ct of maximum ${reward_max} ct`);&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="thisExp.addData('total reward gained', reward_count)&amp;#10;test_5.text = test_5.text.replace('BONUS', f'{reward_count} ct')&amp;#10;print(f'Participant gained an extra {reward_count} ct of maximum {reward_max} ct')" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -1677,7 +1677,7 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="30" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
         <Param val="&lt;Kurze Pause&gt;&amp;#10;&amp;#10;Bitte nehmen Sie eine kurze Verschnaufpause.&amp;#10;&amp;#10;Drücken Sie eine beliebige Taste, wenn Sie mit dem nächsten Block fortfahren wollen." valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
@@ -1697,7 +1697,7 @@
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
-        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="30" valType="code" updates="constant" name="stopVal"/>
         <Param val="last key" valType="str" updates="constant" name="store"/>
         <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
@@ -1980,7 +1980,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
       </ImageComponent>
       <TextComponent name="german_text" plugin="None">
-        <Param val="-1.0000, 1.0000, -1.0000" valType="color" updates="constant" name="color"/>
+        <Param val="-1.0000, -0.2157, -1.0000" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
@@ -2005,7 +2005,7 @@
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
       <TextComponent name="english_text" plugin="None">
-        <Param val="0.0588, 0.6157, 0.9608" valType="color" updates="constant" name="color"/>
+        <Param val="0.0902, -1.0000, -1.0000" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
         <Param val="1" valType="num" updates="constant" name="contrast"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
@@ -2025,12 +2025,12 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="Press the right (blue) button for English" valType="str" updates="constant" name="text"/>
+        <Param val="Press the right (red) button for English" valType="str" updates="constant" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
       <KeyboardComponent name="choice_key" plugin="None">
-        <Param val="'g','b'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="'g','b', 'r'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
@@ -2060,8 +2060,8 @@
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="if ((choice_key.keys === &quot;g&quot;)) {&amp;#10;    german_polygon.borderColor = [1, 0.2941, (- 1)];&amp;#10;    language = &quot;german&quot;;&amp;#10;} else {&amp;#10;    if ((choice_key.keys === &quot;b&quot;)) {&amp;#10;        english_polygon.borderColor = [1, 0.2941, (- 1)];&amp;#10;        language = &quot;english&quot;;&amp;#10;    }&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="&amp;#10;if choice_key.keys == &quot;g&quot;:&amp;#10;    german_polygon.borderColor = [1, 0.2941, -1]&amp;#10;    language = &quot;german&quot;&amp;#10;elif choice_key.keys == &quot;b&quot;:&amp;#10;    english_polygon.borderColor = [1, 0.2941, -1]&amp;#10;    language = &quot;english&quot;" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="var _pj;&amp;#10;function _pj_snippets(container) {&amp;#10;    function in_es6(left, right) {&amp;#10;        if (((right instanceof Array) || ((typeof right) === &quot;string&quot;))) {&amp;#10;            return (right.indexOf(left) &gt; (- 1));&amp;#10;        } else {&amp;#10;            if (((right instanceof Map) || (right instanceof Set) || (right instanceof WeakMap) || (right instanceof WeakSet))) {&amp;#10;                return right.has(left);&amp;#10;            } else {&amp;#10;                return (left in right);&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;    container[&quot;in_es6&quot;] = in_es6;&amp;#10;    return container;&amp;#10;}&amp;#10;_pj = {};&amp;#10;_pj_snippets(_pj);&amp;#10;if ((choice_key.keys === &quot;g&quot;)) {&amp;#10;    german_polygon.borderColor = [1, 0.2941, (- 1)];&amp;#10;    language = &quot;german&quot;;&amp;#10;} else {&amp;#10;    if (_pj.in_es6(choice_key.keys, &quot;br&quot;)) {&amp;#10;        english_polygon.borderColor = [1, 0.2941, (- 1)];&amp;#10;        language = &quot;english&quot;;&amp;#10;    }&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="&amp;#10;if choice_key.keys == &quot;g&quot;:&amp;#10;    german_polygon.borderColor = [1, 0.2941, -1]&amp;#10;    language = &quot;german&quot;&amp;#10;elif choice_key.keys in &quot;br&quot;:&amp;#10;    english_polygon.borderColor = [1, 0.2941, -1]&amp;#10;    language = &quot;english&quot;" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="choice_code" valType="code" updates="None" name="name"/>
       </CodeComponent>
