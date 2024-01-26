@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" ?>
-<PsychoPy2experiment encoding="utf-8" version="2023.2.2">
+<PsychoPy2experiment encoding="utf-8" version="2023.2.3">
   <Settings>
     <Param val="0" valType="str" updates="None" name="Audio latency priority"/>
     <Param val="pyo" valType="str" updates="None" name="Audio lib"/>
@@ -21,7 +21,7 @@
     <Param val="True" valType="bool" updates="None" name="Save log file"/>
     <Param val="True" valType="bool" updates="None" name="Save psydat file"/>
     <Param val="True" valType="bool" updates="None" name="Save wide csv file"/>
-    <Param val="2" valType="num" updates="None" name="Screen"/>
+    <Param val="1" valType="num" updates="None" name="Screen"/>
     <Param val="True" valType="bool" updates="None" name="Show info dlg"/>
     <Param val="False" valType="bool" updates="None" name="Show mouse"/>
     <Param val="use prefs" valType="str" updates="None" name="Units"/>
@@ -53,6 +53,10 @@
     <Param val="('MIDDLE_BUTTON',)" valType="list" updates="None" name="mgBlink"/>
     <Param val="CONTINUOUS" valType="str" updates="None" name="mgMove"/>
     <Param val="0.5" valType="num" updates="None" name="mgSaccade"/>
+    <Param val="neon.local" valType="str" updates="None" name="plCompanionAddress"/>
+    <Param val="scene_camera.json" valType="file" updates="None" name="plCompanionCameraCalibration"/>
+    <Param val="8080" valType="num" updates="None" name="plCompanionPort"/>
+    <Param val="True" valType="bool" updates="None" name="plCompanionRecordingEnabled"/>
     <Param val="0.6" valType="num" updates="None" name="plConfidenceThreshold"/>
     <Param val="True" valType="bool" updates="None" name="plPupilCaptureRecordingEnabled"/>
     <Param val="" valType="str" updates="None" name="plPupilCaptureRecordingLocation"/>
@@ -709,7 +713,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="&amp;#10;choices = [df_trial.target_idx, df_trial.lure_idx]&amp;#10;if df_trial.correct_pos=='r':&amp;#10;    choices = choices[::-1]&amp;#10;    &amp;#10;&amp;#10;question_text.text = f'Position\n\n\n\n\n{cue_text.text}\n\n\n\n\n'&amp;#10;question_text.text += '             ?             '.join([str(c+1) for c in choices])" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="&amp;#10;choices = [df_trial.target_idx, df_trial.lure_idx]&amp;#10;if df_trial.correct_pos=='r':&amp;#10;    choices = choices[::-1]&amp;#10;    &amp;#10;&amp;#10;question_text.text = f'Position\n\n\n\n{cue_text.text}\n\n\n\n'&amp;#10;question_text.text += '             ?             '.join([str(c+1) for c in choices])" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -1714,8 +1718,8 @@
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="send_trigger(trigger_break_stop);&amp;#10;console.log(&quot;break ended&quot;);&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="send_trigger(trigger_break_stop)&amp;#10;print('break ended')&amp;#10;" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="send_trigger(trigger_break_stop);&amp;#10;console.log(&quot;break ended&quot;);&amp;#10;core.wait(0.01);&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="send_trigger(trigger_break_stop)&amp;#10;print('break ended')&amp;#10;core.wait(0.01)  # wait so trigger can reset&amp;#10;" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="code_break" valType="code" updates="None" name="name"/>
       </CodeComponent>
@@ -2061,7 +2065,7 @@
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
         <Param val="var _pj;&amp;#10;function _pj_snippets(container) {&amp;#10;    function in_es6(left, right) {&amp;#10;        if (((right instanceof Array) || ((typeof right) === &quot;string&quot;))) {&amp;#10;            return (right.indexOf(left) &gt; (- 1));&amp;#10;        } else {&amp;#10;            if (((right instanceof Map) || (right instanceof Set) || (right instanceof WeakMap) || (right instanceof WeakSet))) {&amp;#10;                return right.has(left);&amp;#10;            } else {&amp;#10;                return (left in right);&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;    container[&quot;in_es6&quot;] = in_es6;&amp;#10;    return container;&amp;#10;}&amp;#10;_pj = {};&amp;#10;_pj_snippets(_pj);&amp;#10;if ((choice_key.keys === &quot;g&quot;)) {&amp;#10;    german_polygon.borderColor = [1, 0.2941, (- 1)];&amp;#10;    language = &quot;german&quot;;&amp;#10;} else {&amp;#10;    if (_pj.in_es6(choice_key.keys, &quot;br&quot;)) {&amp;#10;        english_polygon.borderColor = [1, 0.2941, (- 1)];&amp;#10;        language = &quot;english&quot;;&amp;#10;    }&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="&amp;#10;if choice_key.keys == &quot;g&quot;:&amp;#10;    german_polygon.borderColor = [1, 0.2941, -1]&amp;#10;    language = &quot;german&quot;&amp;#10;elif choice_key.keys in &quot;br&quot;:&amp;#10;    english_polygon.borderColor = [1, 0.2941, -1]&amp;#10;    language = &quot;english&quot;" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="&amp;#10;if choice_key.keys == &quot;g&quot;:&amp;#10;    german_polygon.borderColor = [1, 0.2941, -1]&amp;#10;    language = &quot;german&quot;&amp;#10;elif choice_key.keys in &quot;br&quot;:&amp;#10;    english_polygon.borderColor = [1, 0.2941, -1]&amp;#10;    language = &quot;english&quot;&amp;#10;" valType="extendedCode" updates="constant" name="End Routine"/>
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="choice_code" valType="code" updates="None" name="name"/>
       </CodeComponent>
