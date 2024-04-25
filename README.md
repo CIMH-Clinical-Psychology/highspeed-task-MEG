@@ -6,17 +6,22 @@ Check [requirements](#requirements).
 
 ### Response key
 
-Left: <kbd>G</kbd> | Right: <kbd>B</kbd>
+Left: <kbd>G</kbd> (green) | Right: <kbd>B</kbd> (blue)
 
 ### Run instructions
 
-1. Open `fast_replay_instructions.psyexp` in PsychoPy
-1. For German, press <kbd>G</kbd>. For English, press <kbd>B</kbd>.
+1. Open `2_fast_replay_instructions.psyexp` in PsychoPy
+2. For German, press <kbd>G</kbd> (green/right). For English, press <kbd>B</kbd> (blue/right).
+
+### Run main experiment
+
+1. Open `3_fast_replay_main.psyexp` in PsychoPy
+2. For German, press <kbd>G</kbd> (green/right). For English, press <kbd>B</kbd> (blue/right).
 
 ## Requirements
 
 1. Install [PsychoPy](https://www.psychopy.org/)
-1. Allow PsychoPy to control your computer (macOS)
+2. Allow PsychoPy to control your computer (macOS)
 
 ```
 Attempting tio measure frame rate of screen, please wait...
